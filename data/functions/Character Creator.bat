@@ -1,14 +1,14 @@
 @ECHO OFF
-TITLE Windhelm - Character Creation
-REM Character Creator v1.4.0 (240222) for Build 2 "Bottle o' Features"
+TITLE (WINDHELM) Beta 2.1.1 - Character Creator
 
-REM Does Player data already exist? If so, overwrite it?
+REM Check for existing Player data.
 IF EXIST "%cd%\data\player\Player Stats.txt" (
     GOTO :overwrite_saveQ
 ) ELSE (
     GOTO :ENTER_NAME
 )
 
+REM Warns the Player that an existing save has been found and asks if they wish to overwrite it.
 :overwrite_saveQ
 MODE con: cols=95 lines=20
 CLS
@@ -16,13 +16,13 @@ ECHO.
 TYPE "%cd%\data\ascii\menus\overwrite_save.txt"
 ECHO.
 ECHO.
-ECHO Do you wish to overwrite an existing save?
+ECHO Warning! An existing save has been detected. Do you wish to overwrite this existing save?
 ECHO +---------------------------------------------------------------------------------------------+
 CHOICE /C YN /N /M "Y/N"
 IF ERRORLEVEL 2 GOTO :DNO
 IF ERRORLEVEL 1 GOTO :ENTER_NAME
 
-REM "DO NOT OVERWRITE"
+REM Does not overwrite the save and quits back to Windhelm.
 :DNO
 SET OSQ=1
 GOTO :EOF
@@ -233,36 +233,44 @@ IF ERRORLEVEL 1 GOTO :SORCERER_CHOSEN
 GOTO :CHOOSE_CLASS
 
 :DRUID_CHOSEN
+SET SLOPr=INIT
 CALL "%cd%\data\functions\SLOP.bat"
-SET HP=70
-SET MAGICKA=200
-SET /A magickaT_q=!magickaT_q! +5
+SET player_health=70
+SET player_health_max=70
+SET player_magicka=200
+SET player_magicka_max=200
 SET player_class=Druid
-SET MAGICKAMAX=200
-SET HPMAX=70
+SET player_class_ability=precognition
+SET /A player_magickaTonic_owned+=5
 SET SLOPr=SAVE
 CALL "%cd%\data\functions\SLOP.bat"
 GOTO :EOF
 
 :WARRIOR_CHOSEN
+SET SLOPr=INIT
 CALL "%cd%\data\functions\SLOP.bat"
-SET HP=160
-SET MAGICKA=30
-SET /A healingT_q=!healingT_q! +5
+SET player_health=160
+SET player_health_max=160
+SET player_magicka=30
+SET player_magicka_max=30
 SET player_class=Warrior
-SET MAGICKAMAX=30
-SET HPMAX=160
+SET player_class_ability=none
+SET /A player_healingTonic_owned=!player_healingTonic_owned! +5
 SET SLOPr=SAVE
 CALL "%cd%\data\functions\SLOP.bat"
 GOTO :EOF
 
 :SORCERER_CHOSEN
+SET SLOPr=INIT
 CALL "%cd%\data\functions\SLOP.bat"
+SET player_health=100
+SET player_health_max=100
+SET player_magicka=150
+SET player_magicka_max=150
+SET player_stamina=50
+SET player_stamina_max=50
 SET player_class=Sorcerer
-SET MAGICKAMAX=150
-SET STAMINAMAX=50
-SET MAGICKA=150
-SET STAMINA=50
+SET player_class_ability=none
 SET /A magickaT_q=!magickaT_q! +10
 SET SLOPr=SAVE
 CALL "%cd%\data\functions\SLOP.bat"
