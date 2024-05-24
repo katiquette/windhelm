@@ -1,7 +1,7 @@
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 @ECHO OFF & SETLOCAL ENABLEDELAYEDEXPANSION
-REM Windhelm Beta Version 2.1.0 [ 240522-B1.B2R.GU1 ]
-REM For clarity: 240522 (Date) B1 (Build 1) B2R (Beta 2 Release) GU1 (General Update 1)
+REM Windhelm Beta Version 2.1.0 [ 240524-B1.BE2.GU1 ]
+REM For clarity: 240524 (Date) B1 (Build 1) BE2 (Beta 2) GU1 (General Update 1)
 REM This version of Windhelm was made by merelymae (Original Author).
 REM https://github.com/merelymae/windhelm
 REM This software is licensed under GPL-3.0-or-later.
@@ -28,11 +28,11 @@ TITLE (WINDHELM - Mysticism) Main Menu ^| Welcome to Windhelm.
 MODE con: cols=120 lines=20
 CLS
 ECHO.
-TYPE "%winLoc%\data\ascii\menus\main.txt"
+TYPE "%winLoc%\data\assets\ui\main.txt"
 ECHO.
 ECHO.
+ECHO Beta Version 2.1.0 (240524-B1.BE2.GU1) "Mysticism"
 ECHO Copyright (c) merelymae, 2024. GPL-3.0-or-later License. https://github.com/merelymae/windhelm
-ECHO Beta Version 2.1.0 (240522-B1.B2R.GU1) "Mysticism"
 ECHO ========================================================================================================================
 ECHO                           [1 / CONTINUE ] ^| [2 / NEW GAME ] ^| [3 / SETTINGS ] ^| [E / EXIT ]
 ECHO.
@@ -79,7 +79,7 @@ IF %player_health% LSS 0 set player_health=0
 CLS
 REM Write the data from the text file to the CLI.
 ECHO.
-TYPE "%winLoc%\data\ascii\menus\windhelm.txt"
+TYPE "%winLoc%\data\assets\ui\windhelm.txt"
 ECHO.
 ECHO.
 ECHO %displayMessage%
