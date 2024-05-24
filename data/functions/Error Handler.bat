@@ -1,28 +1,29 @@
 @ECHO OFF
-TITLE (WINDHELM) Error Encountered ^| %errorType%
+TITLE (WINDHELM) Error Encountered ^| ERROR: %errorType%
 COLOR 4F
-REM Error Handler. Version 1.1.1 (240205) For Windhelm Build 2 "Bottle o' Features"
+REM Does this even count as an "Error Handler"? I mean, this thing can only be called when there are errors that I myself have predicted...
+REM Like someone tampering with game files (deleting/renaming them) or something similar.
 
 REM Check error type
 IF %errorType% == EnemyType (
-    GOTO :enemyTypeError
+    GOTO :errorType_enemy
 ) ELSE IF %errorType% == checkTime (
-    GOTO :ctError
+    GOTO :errorType_checkTime
 ) ELSE IF %errorType% == attributeSkill (
-    GOTO :aSerror
+    GOTO :errorType_attributeSkill
 ) ELSE IF %errorType% == encounterError (
-    GOTO :eError
+    GOTO :errorType_encounterError
 ) ELSE IF %errorType% == LastLocal (
-    GOTO :llError
+    GOTO :errorType_lastLocal
 ) ELSE (
     REM ...an error, inside of Error Handler??? Unthinkable!
     SET errorType=unknownError
-    ECHO Error Handler encountered an uknown error and cannot provide more information. >> ErrorHandler.log
+    ECHO Error handler encountered an unhandled error. Check for logs from other scripts! >> ErrorHandler.log
     EXIT
 )
 
 REM Display the "Enemy Type" error.
-:enemyTypeError
+:errorType_enemy
 CLS
 ECHO.
 ECHO ERROR! Error Type: EnemyType.
@@ -33,7 +34,7 @@ PAUSE
 EXIT
 
 REM Display the "Attribute - Skill" error.
-:aSerror
+:errorType_attributeSkill
 CLS
 ECHO.
 ECHO ERROR! Error Type: attributeSkill.
@@ -46,18 +47,18 @@ ECHO This... this is the only way to cause this error. Stop messing with my shit
 PAUSE
 EXIT
 
-:eError
+:errorType_encounterError
 CLS
 ECHO.
 ECHO Error Encountered - Windhelm has stopped.
 ECHO Error Type: %errorType%
 ECHO =======================================================
 ECHO This could be caused by a corrupted script or save file.
-ECHO If this repeats, email quitefrankish@gmail.com
+ECHO If this repeats, email nope@donotemailme.fuckoff.com
 PAUSE
 EXIT
 
-:llError
+:errorType_lastLocal
 CLS
 ECHO.
 ECHO Error Encountered - Windhelm has stopped.
@@ -65,6 +66,8 @@ ECHO Error Type: %errorType%
 echo %ll%
 ECHO =======================================================
 ECHO Corrupted or modified save file.
-ECHO If this repeats, email quitefrankish@gmail.com
+ECHO If this repeats, email nope@donotemailme.fuckoff.com
 PAUSE
 EXIT
+
+REM Submit an issue on GitHub ya goober! ...you bothered to snoop through the code anyway.
