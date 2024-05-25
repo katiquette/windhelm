@@ -88,10 +88,11 @@ ECHO %follower_occupation%
 ECHO %gary_morcant_added_party%
 ECHO %gabrial_aberdeen_added_party%
 ECHO %clarke_blackwell_added_party%
-ECHO %player_longsword_owned%
-ECHO %player_shortsword_owned%
-ECHO %player_greataxe_owned%
+ECHO %player_longSword_owned%
+ECHO %player_shortSword_owned%
+ECHO %player_greatAxe_owned%
 ECHO %player_mace_owned%
+ECHO %player_woodenBow_owned%
 ECHO %player_cactusA_owned%
 ECHO %player_stoneA_owned%
 ECHO %player_steelA_owned%
@@ -213,10 +214,11 @@ SET /P follower_occupation=
 SET /P gary_morcant_added_party=
 SET /P gabrial_aberdeen_added_party=
 SET /P clarke_blackwell_added_party=
-SET /P player_longsword_owned=
-SET /P player_shortsword_owned=
-SET /P player_greataxe_owned=
+SET /P player_longSword_owned=
+SET /P player_shortSword_owned=
+SET /P player_greatAxe_owned=
 SET /P player_mace_owned=
+SET /P player_woodenBow_owned=
 SET /P player_cactusA_owned=
 SET /P player_stoneA_owned=
 SET /P player_steelA_owned=
@@ -351,10 +353,11 @@ GOTO :PLAYER_INIT_INVENTORY
 REM Creates empty inventory slots
 :PLAYER_INIT_INVENTORY
 REM Create weapons owned values.
-SET player_longsword_owned=0
-SET player_shortsword_owned=0
-SET player_greataxe_owned=0
+SET player_longSword_owned=0
+SET player_shortSword_owned=0
+SET player_greatAxe_owned=0
 SET player_mace_owned=0
+SET player_woodenBow_owned=0
 REM Create armor owned values.
 SET player_cactusA_owned=0
 SET player_stoneA_owned=0
