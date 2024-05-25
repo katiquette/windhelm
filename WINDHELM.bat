@@ -61,7 +61,7 @@ REM Load Player save data.
 :LOAD_SAVE
 REM Check if a save even exists.
 SET SLOPr=LOAD
-IF NOT EXIST "%winLoc%\data\player\Player Stats.txt" (
+IF NOT EXIST "%winLoc%\data\player\playerdata.txt" (
     ECHO Player data not found - please make a new save.
     PAUSE
     GOTO :START
@@ -84,7 +84,7 @@ ECHO.
 ECHO.
 ECHO %displayMessage%
 ECHO +--------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor_equip% ^| MGK: %player_magicka% ^| LEVEL: %player_level% ^| XP: %player_xp% ^| COINS: %player_coins% ^| LUNIS: %player_lunis%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| LEVEL: %player_level% ^| XP: %player_xp% ^| COINS: %player_coins% ^| LUNIS: %player_lunis%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_stamina%
 ECHO +--------------------------------------------------------------------------------------------------+
