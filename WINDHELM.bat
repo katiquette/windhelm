@@ -61,7 +61,7 @@ REM Load Player save data.
 :LOAD_SAVE
 REM Check if a save even exists.
 SET SLOPr=LOAD
-IF NOT EXIST "%winLoc%\data\player\playerdata.txt" (
+IF NOT EXIST "%winLoc%\data\player\savedata.txt" (
     ECHO Player data not found - please make a new save.
     PAUSE
     GOTO :START
