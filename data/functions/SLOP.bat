@@ -54,19 +54,19 @@ REM Saves Player & Merchant data.
 ECHO %player_health%
 ECHO %player_stamina%
 ECHO %player_magicka%
+ECHO %player_damage%
+ECHO %player_armor%
+ECHO %player_class%
 ECHO %player_coins%
 ECHO %player_xp%
 ECHO %player_lunis%
 ECHO %player_level%
+ECHO %player_class_ability%
+ECHO %player_stamina_max%
 ECHO %player_magicka_max%
-ECHO %player_staminaMAX%
-ECHO %player_healthMAX%
+ECHO %player_health_max%
 ECHO %player_weapon_type%
-ECHO %player_name%
-ECHO %player_class%
-ECHO %player_max_stamina%
-ECHO %player_damage%
-ECHO %player_armor%
+ECHO %player_armor_equip%
 ECHO %player_stamina_equip%
 ECHO %player_damage_skill%
 ECHO %player_stamina_skill%
@@ -74,9 +74,6 @@ ECHO %player_magicka_skill%
 ECHO %player_speech_skill%
 ECHO %player_reputation%
 ECHO %player_ruins_unlocked%
-ECHO %player_weapon_equipped%
-ECHO %player_shield_equipped%
-ECHO %player_armor_equipped%
 ECHO %player_last_location%
 ECHO %follower_name%
 ECHO %follower_health%
@@ -86,62 +83,47 @@ ECHO %follower_magicka_skill%
 ECHO %follower_attack%
 ECHO %follower_stamina%
 ECHO %follower_magicka%
-ECHO %follower_occupation%
 ECHO %PARTY_SLOT_1%
+ECHO %follower_occupation%
 ECHO %gary_morcant_added_party%
 ECHO %gabrial_aberdeen_added_party%
 ECHO %clarke_blackwell_added_party%
-ECHO %personal_p_1%
-ECHO %personal_p_2%
-ECHO %possesive_1%
-ECHO %reflexive_1%
-ECHO %intensive_1%
-)>"%cd%\data\player\Player Stats.txt"
-GOTO :PLAYER_SAVE_TOOLS
-
-REM Save the Player's tool data.
-:PLAYER_SAVE_TOOLS
-(
-ECHO %player_longSword_owned%
-ECHO %player_shortSword_owned%
-ECHO %player_greatAxe_owned%
+ECHO %player_longsword_owned%
+ECHO %player_shortsword_owned%
+ECHO %player_greataxe_owned%
 ECHO %player_mace_owned%
-ECHO %player_woodenBow_owned%
-ECHO %player_cactusArmor_owned%
-ECHO %player_stoneArmor_owned%
-ECHO %player_steelArmor_owned%
-ECHO %player_scaledArmor_owned%
-ECHO %player_guardArmor_owned%
-ECHO %player_ironArmor_owned%
-ECHO %player_leatherArmor_owned%
-ECHO %player_silverArmor_owned%
-ECHO %player_goldArmor_owned%
-ECHO %player_basicRobes_owned%
-ECHO %player_intermediateRobes_owned%
-ECHO %player_advancedRobes_owned%
+ECHO %player_cactusA_owned%
+ECHO %player_stoneA_owned%
+ECHO %player_steelA_owned%
+ECHO %player_scaledA_owned%
+ECHO %player_guardA_owned%
+ECHO %player_ironA_owned%
+ECHO %player_leatherA_owned%
+ECHO %player_silverA_owned%
+ECHO %player_goldA_owned%
+ECHO %player_bRobes_owned%
+ECHO %player_iRobes_owned%
+ECHO %player_aRobes_owned%
 ECHO %player_bronze_buckler_owned%
 ECHO %player_kite_shield_owned%
-)>"%cd%\data\player\inventory\Tools.txt"
-GOTO :PLAYER_SAVE_GENERAL
-
-REM Save general player items
-:PLAYER_SAVE_GENERAL
-(
-ECHO %player_healingTonic_owned%
-ECHO %player_staminaTonic_owned%
-ECHO %player_magickaTonic_owned%
+ECHO %player_healingT_owned%
+ECHO %player_staminaT_owned%
+ECHO %player_magickaT_owned%
+ECHO %player_stunT_owned%
+ECHO %player_weapon_equipped%
+ECHO %player_shield_equipped%
+ECHO %player_armor_equipped%
 ECHO %player_travelerJournal_owned%
 ECHO %player_merchantGuide_owned%
-ECHO %player_guideToBlades_owned%
+ECHO %player_guide_to_blades_owned%
 ECHO %player_travelerJournal_read%
 ECHO %player_merchantGuide_read%
-ECHO %player_guideTo_Blades_read%
-)>"%cd%\data\player\inventory\General Items.txt"
-GOTO :BLACKSMITH_SAVE_DATA
-
-REM SAVING MERCHANT DATA - BLACKSMITH
-:BLACKSMITH_SAVE_DATA
-(
+ECHO %player_guide_to_blades_read%
+ECHO %blacksmith_longSword_price%
+ECHO %blacksmith_shortSword_price%
+ECHO %blacksmith_greatAxe_price%
+ECHO %blacksmith_mace_price%
+ECHO %blacksmith_woodenBow_price%
 ECHO %blacksmith_longSword_price%
 ECHO %blacksmith_shortSword_price%
 ECHO %blacksmith_greatAxe_price%
@@ -152,50 +134,26 @@ ECHO %blacksmith_shortSword_stock%
 ECHO %blacksmith_greatAxe_stock%
 ECHO %blacksmith_mace_stock%
 ECHO %blacksmith_woodenBow_stock%
-)>"%cd%\data\Exploration Engine\data\blacksmith.txt"
-GOTO :WIZARD_SAVE_DATA
-
-REM SAVING MERCHANT DATA - WIZARD
-:WIZARD_SAVE_DATA
-(
-ECHO %wizard_basicRobes_price%
-ECHO %wizard_intermediateRobes_price%
-ECHO %wizard_advancedRobes_price%
-ECHO %wizard_basicRobes_stock%
-ECHO %wizard_intermediateRobes_stock%
-ECHO %wizard_advancedRobes_stock%
-)>"%cd%\data\Exploration Engine\data\wizard.txt"
-GOTO :LOREKEEPER_SAVE_DATA
-
-REM SAVING MERCHANT DATA - LOREKEEPER
-:LOREKEEPER_SAVE_DATA
-(
 ECHO %lorekeeper_travelerJournal_price%
 ECHO %lorekeeper_merchantGuide_price%
 ECHO %lorekeeper_guide_To_Blades_price%
-ECHO %lorekeeper_ruinsMap_price%
+ECHO %lorekeeper_ruinsmap_price%
 ECHO %lorekeeper_travelerJournal_stock%
 ECHO %lorekeeper_merchantGuide_stock%
-ECHO %lorekeeper_guide_To_Blades_stock%
+ECHO %lorekeeper_guideToBlades_stock%
 ECHO %lorekeeper_ruinsMap_stock%
-)>"%cd%\data\Exploration Engine\data\lorekeeper.txt"
-GOTO :ALCHEMIST_SAVE_DATA
-
-REM SAVING MERCHANT DATA - ALCHEMIST
-:ALCHEMIST_SAVE_DATA
-(
 ECHO %alchemist_healthTonic_price%
 ECHO %alchemist_staminaTonic_price%
 ECHO %alchemist_magickaTonic_price%
 ECHO %alchemist_healthTonic_stock%
 ECHO %alchemist_staminaTonic_stock%
 ECHO %alchemist_magickaTonic_stock%
-)>"%cd%\data\Exploration Engine\data\alchemist.txt"
-GOTO :ARMORER_SAVE_DATA
-
-REM SAVING MERCHANT DATA - ARMORER
-:ARMORER_SAVE_DATA
-(
+ECHO %wizard_basicRobes_price%
+ECHO %wizard_intermediateRobes_price%
+ECHO %wizard_advancedRobes_price%
+ECHO %wizard_basicRobes_stock%
+ECHO %wizard_intermediateRobes_stock%
+ECHO %wizard_advancedRobes_stock%
 ECHO %armorer_cactusArmor_price%
 ECHO %armorer_stoneArmor_price%
 ECHO %armorer_steelArmor_price%
@@ -212,7 +170,7 @@ ECHO %armorer_ironArmor_stock%
 ECHO %armorer_leatherArmor_stock%
 ECHO %armorer_silverArmor_stock%
 ECHO %armorer_goldArmor_stock%
-)>"%cd%\data\Exploration Engine\data\armorer.txt"
+)
 GOTO :EOF
 
 REM Loads Player stats.
@@ -221,35 +179,26 @@ REM Loads Player stats.
 SET /P player_health=
 SET /P player_stamina=
 SET /P player_magicka=
+SET /P player_damage=
+SET /P player_armor=
+SET /P player_class=
 SET /P player_coins=
 SET /P player_xp=
 SET /P player_lunis=
 SET /P player_level=
 SET /P player_class_ability=
+SET /P player_stamina_max=
 SET /P player_magicka_max=
-SET /P player_staminaMAX=
-SET /P player_healthMAX=
+SET /P player_health_max=
 SET /P player_weapon_type=
-SET /P player_name=
-SET /P player_class=
-SET /P player_max_stamina=
-SET /P player_damage=
-SET /P player_armor=
+SET /P player_armor_equip=
 SET /P player_stamina_equip=
 SET /P player_damage_skill=
 SET /P player_stamina_skill=
 SET /P player_magicka_skill=
 SET /P player_speech_skill=
 SET /P player_reputation=
-SET /P player_affinity_alchemist=
-SET /P player_affinity_armorer=
-SET /P player_affinity_blacksmith=
-SET /P player_affinity_armorer=
-SET /P player_affinity_wizard=
 SET /P player_ruins_unlocked=
-SET /P player_weapon_equipped=
-SET /P player_shield_equipped=
-SET /P player_armor_equipped=
 SET /P player_last_location=
 SET /P follower_name=
 SET /P follower_health=
@@ -259,63 +208,47 @@ SET /P follower_magicka_skill=
 SET /P follower_attack=
 SET /P follower_stamina=
 SET /P follower_magicka=
-SET /P follower_occupation=
 SET /P PARTY_SLOT_1=
+SET /P follower_occupation=
 SET /P gary_morcant_added_party=
 SET /P gabrial_aberdeen_added_party=
 SET /P clarke_blackwell_added_party=
-SET /P personal_p_1=
-SET /P personal_p_2=
-SET /P possesive_1=
-SET /P reflexive_1=
-SET /P intensive_1=
-)<"%cd%\data\player\Player Stats.txt"
-GOTO :PLAYER_LOAD_TOOLS
-
-REM Load the Player's tool data.
-:PLAYER_LOAD_TOOLS
-(
-SET /P player_longSword_owned=
-SET /P player_shortSword_owned=
-SET /P player_greatAxe_owned=
+SET /P player_longsword_owned=
+SET /P player_shortsword_owned=
+SET /P player_greataxe_owned=
 SET /P player_mace_owned=
-SET /P player_woodenBow_owned=
-SET /P player_cactusArmor_owned=
-SET /P player_stoneArmor_owned=
-SET /P player_steelArmor_owned=
-SET /P player_scaledArmor_owned=
-SET /P player_guardArmor_owned=
-SET /P player_ironArmor_owned=
-SET /P player_leatherArmor_owned=
-SET /P player_silverArmor_owned=
-SET /P player_goldArmor_owned=
-SET /P player_basicRobes_owned=
-SET /P player_intermediateRobes_owned=
-SET /P player_advancedRobes_owned=
+SET /P player_cactusA_owned=
+SET /P player_stoneA_owned=
+SET /P player_steelA_owned=
+SET /P player_scaledA_owned=
+SET /P player_guardA_owned=
+SET /P player_ironA_owned=
+SET /P player_leatherA_owned=
+SET /P player_silverA_owned=
+SET /P player_goldA_owned=
+SET /P player_bRobes_owned=
+SET /P player_iRobes_owned=
+SET /P player_aRobes_owned=
 SET /P player_bronze_buckler_owned=
 SET /P player_kite_shield_owned=
-)<"%cd%\data\player\inventory\Tools.txt"
-GOTO :PLAYER_LOAD_GENERAL_ITEMS
-
-REM Load the Player's general item data.
-:PLAYER_LOAD_GENERAL_ITEMS
-(
-SET /P player_healingTonic_owned=
-SET /P player_staminaTonic_owned=
-SET /P player_magickaTonic_owned=
+SET /P player_healingT_owned=
+SET /P player_staminaT_owned=
+SET /P player_magickaT_owned=
+SET /P player_stunT_owned=
+SET /P player_weapon_equipped=
+SET /P player_shield_equipped=
+SET /P player_armor_equipped=
 SET /P player_travelerJournal_owned=
 SET /P player_merchantGuide_owned=
-SET /P player_guide_To_Blades_owned=
+SET /P player_guide_to_blades_owned=
 SET /P player_travelerJournal_read=
 SET /P player_merchantGuide_read=
-SET /P player_guide_To_Blades_read=
-)<"%cd%\data\player\inventory\General Items.txt"
-GOTO :BLACKSMITH_LOAD_INVENTORY
-
-REM Rockwinn Plaza NPC loading.
-REM Loads the Blacksmith's inventory data.
-:BLACKSMITH_LOAD_INVENTORY
-(
+SET /P player_guide_to_blades_read=
+SET /P blacksmith_longSword_price=
+SET /P blacksmith_shortSword_price=
+SET /P blacksmith_greatAxe_price=
+SET /P blacksmith_mace_price=
+SET /P blacksmith_woodenBow_price=
 SET /P blacksmith_longSword_price=
 SET /P blacksmith_shortSword_price=
 SET /P blacksmith_greatAxe_price=
@@ -326,12 +259,26 @@ SET /P blacksmith_shortSword_stock=
 SET /P blacksmith_greatAxe_stock=
 SET /P blacksmith_mace_stock=
 SET /P blacksmith_woodenBow_stock=
-)<"%cd%\data\Exploration Engine\data\blacksmith.txt"
-GOTO :ARMORER_LOAD_DATA
-
-REM LOAD MERCHANT DATA - ARMORER
-:ARMORER_LOAD_DATA
-(
+SET /P lorekeeper_travelerJournal_price=
+SET /P lorekeeper_merchantGuide_price=
+SET /P lorekeeper_guide_To_Blades_price=
+SET /P lorekeeper_ruinsmap_price=
+SET /P lorekeeper_travelerJournal_stock=
+SET /P lorekeeper_merchantGuide_stock=
+SET /P lorekeeper_guideToBlades_stock=
+SET /P lorekeeper_ruinsMap_stock=
+SET /P alchemist_healthTonic_price=
+SET /P alchemist_staminaTonic_price=
+SET /P alchemist_magickaTonic_price=
+SET /P alchemist_healthTonic_stock=
+SET /P alchemist_staminaTonic_stock=
+SET /P alchemist_magickaTonic_stock=
+SET /P wizard_basicRobes_price=
+SET /P wizard_intermediateRobes_price=
+SET /P wizard_advancedRobes_price=
+SET /P wizard_basicRobes_stock=
+SET /P wizard_intermediateRobes_stock=
+SET /P wizard_advancedRobes_stock=
 SET /P armorer_cactusArmor_price=
 SET /P armorer_stoneArmor_price=
 SET /P armorer_steelArmor_price=
@@ -348,45 +295,7 @@ SET /P armorer_ironArmor_stock=
 SET /P armorer_leatherArmor_stock=
 SET /P armorer_silverArmor_stock=
 SET /P armorer_goldArmor_stock=
-)<"%cd%\data\Exploration Engine\data\armorer.txt"
-GOTO :LOREKEEPER_LOAD_DATA
-
-REM LOAD MERCHANT DATA - LOREKEEPER
-:LOREKEEPER_LOAD_DATA
-(
-SET /P lorekeeper_travelerJournal_price=
-SET /P lorekeeper_merchantGuide_price=
-SET /P lorekeeper_guide_To_Blades_price=
-SET /P lorekeeper_ruinsMap_price=
-SET /P lorekeeper_travelerJournal_stock=
-SET /P lorekeeper_merchantGuide_stock=
-SET /P lorekeeper_guideToBlades_stock=
-SET /P lorekeeper_ruinsMap_stock=
-)<"%cd%\data\Exploration Engine\data\lorekeeper.txt"
-GOTO :WIZARD_LOAD_DATA
-
-REM LOAD MERCHANT DATA - WIZARD
-:WIZARD_LOAD_DATA
-(
-SET /P wizard_basicRobes_price=
-SET /P wizard_intermediateRobes_price=
-SET /P wizard_advancedRobes_price=
-SET /P wizard_basicRobes_stock=
-SET /P wizard_intermediateRobes_stock=
-SET /P wizard_advancedRobes_stock=
-)<"%cd%\data\Exploration Engine\data\wizard.txt"
-GOTO :ALCHEMIST_LOAD_DATA
-
-REM LOAD MERCHANT DATA - ALCHEMIST
-:ALCHEMIST_LOAD_DATA
-(
-SET /P alchemist_healthTonic_price=
-SET /P alchemist_staminaTonic_price=
-SET /P alchemist_magickaTonic_price=
-SET /P alchemist_healthTonic_stock=
-SET /P alchemist_staminaTonic_stock=
-SET /P alchemist_magickaTonic_stock=
-)<"%cd%\data\Exploration Engine\data\alchemist.txt"
+)<"%cd%\data\player\Player Stats.txt"
 GOTO :EOF
 
 REM Runs when a new game is started to generate needed variables.
@@ -394,6 +303,9 @@ REM Runs when a new game is started to generate needed variables.
 SET player_health=100
 SET player_stamina=100
 SET player_magicka=100
+SET player_damage=5
+SET player_armor=0
+SET player_class=None
 SET player_coins=0
 SET player_xp=0
 SET player_lunis=0
@@ -403,7 +315,6 @@ SET player_stamina_max=100
 SET player_magicka_max=100
 SET player_health_max=100
 SET player_weapon_type=Melee
-SET player_damage=5
 REM Functions exactly like the old EAV variable, it's just the armor value.
 SET player_armor_equip=0
 REM Functions like the armor variable, but for Stamina. When I have "equipped" items implemented better in the future, probably wont need this variable, but for now it is needed.
@@ -414,11 +325,6 @@ SET player_stamina_skill=2
 SET player_magicka_skill=2
 SET player_speech_skill=2
 SET player_reputation=2
-REM Player affinity. Level 1: 200, Level 2: 400, Level 3: 600, Level 4: 1000, Level 5 (MAX): 2000
-SET player_affinity_alchemist=200
-SET player_affinity_armorer=200
-SET player_affinity_blacksmith=200
-SET player_affinity_wizard=200
 REM Location unlocks
 SET player_ruins_unlocked=0
 REM Player positions
