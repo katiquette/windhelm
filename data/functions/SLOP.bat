@@ -171,7 +171,7 @@ ECHO %armorer_ironArmor_stock%
 ECHO %armorer_leatherArmor_stock%
 ECHO %armorer_silverArmor_stock%
 ECHO %armorer_goldArmor_stock%
-)
+)>"%cd%\data\player\savedata.txt"
 GOTO :EOF
 
 REM Loads Player stats.
@@ -297,7 +297,7 @@ SET /P armorer_ironArmor_stock=
 SET /P armorer_leatherArmor_stock=
 SET /P armorer_silverArmor_stock=
 SET /P armorer_goldArmor_stock=
-)<"%cd%\data\player\Player Stats.txt"
+)<"%cd%\data\player\savedata.txt"
 GOTO :EOF
 
 REM Runs when a new game is started to generate needed variables.
