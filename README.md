@@ -1,8 +1,6 @@
-# About Windhelm
-Windhelm is a text based, story driven RPG game developed in Batch Script for the Windows operating system.
-
-Explore the Iridescent forest and discover the unique magics that have kept Windhelm safe from the outside world. Encounter shards of others souls, attempt to help them or use them for your own gain.
-Discover your past and attempt to remember who _or what_ you were.
+# About Windhelm Nightly
+This branch recieves updates every time I'm done tweakin' stuff. That means that it is inherently unstable (like this entire project) but also entire parts of the game might just... not work.
+If you're looking to contribute, do it from the main branch.
 
 ### Endings
 As of version Beta 2.0 [ 240418-B2R.GU0 ], there are no endings. However, there are several planned endings further in development.
