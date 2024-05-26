@@ -1,7 +1,7 @@
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 @ECHO OFF
 MODE con: cols=120 lines=29
-REM Combat Engine beta version 1.0.0 [ ce7.1-240524-B2.BE1.GU0 ]
+REM Combat Engine beta version 1.0.0 [ ce7.1-240525-B2.BE1.GU0 ]
 REM For clarity: 250524 (Date) B2 (Build 2) BE1 (Beta 1) GU0 (General Update 0)
 REM This version of Windhelm was made by Midnight Midriff (Original Author).
 REM https://github.com/MidnightMidriff/combat-engine
@@ -24,7 +24,6 @@ REM Write the data from the text file to the CLI.
 ECHO.
 TYPE "%cd%\data\assets\enemies\Iridescent Forest\%curEn%.txt"
 ECHO.
-ECHO Combat Engine Beta ce7.1-240524-B2.BE1.GU0 - Thank you for playing.
 ECHO +---------------------------------------------------------------------------------------------------------------------+
 ECHO ^|                             HP: %enemy_health% ^| ATK: %enemy_attack% ^| STM: %enemy_stamina%
 ECHO ^| %displayMessage%

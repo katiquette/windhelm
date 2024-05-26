@@ -1,9 +1,9 @@
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 @ECHO OFF & SETLOCAL ENABLEDELAYEDEXPANSION
-REM Windhelm Beta Version 2.1.0 [ 240524-B1.BE2.GU1 ]
+REM Windhelm Beta Version 2.1.0 [ 240525-B1.BE2.GU1 ]
 REM For clarity: 240524 (Date) B1 (Build 1) BE2 (Beta 2) GU1 (General Update 1)
-REM This version of Windhelm was made by merelymae (Original Author).
-REM https://github.com/merelymae/windhelm
+REM This version of Windhelm was made by Midnight Midriff (Original Author).
+REM https://github.com/MidnightMidriff/windhelm
 REM This software is licensed under GPL-3.0-or-later.
 
 REM Defaults
@@ -31,8 +31,8 @@ ECHO.
 TYPE "%winLoc%\data\assets\ui\main.txt"
 ECHO.
 ECHO.
-ECHO Beta Version 2.1.0 (240524-B1.BE2.GU1) "Mysticism"
-ECHO Copyright (c) merelymae, 2024. GPL-3.0-or-later License. https://github.com/merelymae/windhelm
+ECHO Beta Version 2.1.0 (240525-B1.BE2.GU1) "Mysticism"
+ECHO Copyright (c) Midnight Midriff, 2024. GPL-3.0-or-later License. https://github.com/MidnightMidriff/windhelm
 ECHO ========================================================================================================================
 ECHO                           [1 / CONTINUE ] ^| [2 / NEW GAME ] ^| [3 / SETTINGS ] ^| [E / EXIT ]
 ECHO.
