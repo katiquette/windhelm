@@ -1,5 +1,10 @@
 @ECHO OFF
-REM Exploration Engine Beta Version 1.0 (240228) for Windhelm Build 2 "Bottle o' Features"
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+REM Exploration Engine beta version 1.1.0 [ ee1-240525-B1.BE2.GU1 ]
+REM For clarity: 250524 (Date) B2 (Build 1) B2R (Beta 1 Release) GU1 (General Update 1)
+REM This version of Windhelm was made by Midnight Midriff (Original Author).
+REM https://github.com/MidnightMidriff/exploration-engine
+REM This software is licensed under GPL-3.0-or-later.
 
 REM Main Menu. Access to hubs/shops and locations to explore.
 :MAIN
@@ -7,15 +12,13 @@ TITLE (WINDHELM) Exploration Engine ^| %player_name% the %player_class%
 MODE con: cols=105 lines=23
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\exp.txt"
+TYPE "%cd%\data\assets\ui\exp.txt"
 ECHO.
 ECHO %displayMessage%
 ECHO +-------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p% ^| COINS: %COINS%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^|  COINS: %player_coins% ^| XP: %player_xp% ^| LUNIS: %player_lunis%
 ECHO +-------------------------------------------------------------------------------------------------------+
-ECHO ^| PARTY 1: %PM1name% ^| HP: %PM1HP% ^| ATK: %PM1ATK% ^| STM: %PM1STM% ^| MGK: %PM1MGK%
-ECHO ^| PARTY 2: %PM2name% ^| HP: %PM2HP% ^| ATK: %PM2ATK% ^| STM: %PM2STM% ^| MGK: %PM2MGK%
-ECHO ^| PARTY 3: %PM3name% ^| HP: %PM3HP% ^| ATK: %PM3ATK% ^| STM: %PM3STM% ^| MGK: %PM3MGK%
+ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_HP% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka%
 ECHO +-------------------------------------------------------------------------------------------------------+
 ECHO + [1 / IRIDESCENT FOREST ] ^| [2 / RUINS ] ^| [3 / ROCKWINN PLAZA ] ^| [P / PARTY MANAGER ] ^| [E / GO BACK ]
 ECHO +-------------------------------------------------------------------------------------------------------+
@@ -125,7 +128,7 @@ IF %ruins_unlocked% EQU 1 (
     GOTO :EXPLORE_RUINS
 ) ELSE (
     REM Ruins have not been unlocked.
-    SET displayMessage=You can't explore here yet! Unlock this location at the Wizard.
+    SET displayMessage=You can't quite explore here yet. Reach level 2 first!
     GOTO :MAIN
 )
 
