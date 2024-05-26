@@ -3,9 +3,10 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 MODE con: cols=120 lines=29
 REM Combat Engine beta version 1.0.0 [ ce7.1-240524-B2.BE1.GU0 ]
 REM For clarity: 250524 (Date) B2 (Build 2) BE1 (Beta 1) GU0 (General Update 0)
-REM This version of Windhelm was made by merelymae (Original Author).
-REM https://github.com/merelymae/combat-engine
+REM This version of Windhelm was made by Midnight Midriff (Original Author).
+REM https://github.com/MidnightMidriff/combat-engine
 REM This software is licensed under GPL-3.0-or-later.
+setlocal enabledelayedexpansion
 
 REM old vars
 REM ...
@@ -72,61 +73,98 @@ IF NOT "%q_action_1%" == "EMPTY" (
 
 REM Ends the Player's current turn.
 :PLAYER_END_TURN
+REM Checks if Queue_Action_1 is empty.
 IF "%q_action_1%" == "EMPTY" (
-    SET /A TURN_LOOP=+1
+    REM Increments the TURN_LOOP variable by one, which is used to end this loop when all action slots are empty.
+    SET /A TURN_LOOP=!TURN_LOOP! +1
+    REM Checks if the maximum amount of loops has been reached (3).
     IF %TURN_LOOP% GEQ 3 (
-        REM END_TURN has looped thrice, end it.
+        REM TURN_LOOP has reached the maximum of 3, terminate this loop.
+        SET TURN_LOOP=0
         GOTO :EBS
-    )
-    IF "%q_action_2%" == "EMPTY" (
-        SET /A TURN_LOOP=+1
-        IF %TURN_LOOP% GEQ 3 (
-        REM END_TURN has looped thrice, end it.
-        GOTO :EBS
-    )
-        IF "%q_action_3%" == "EMPTY" (
-            SET /A TURN_LOOP=+1
-            IF %TURN_LOOP% GEQ 3 (
-            REM END_TURN has looped thrice, end it.
-            GOTO :EBS
-            )
-            REM Player's action queue is empty. Proceed.
-            GOTO :PLAYER_ARMOR_CALCULATE
-        ) ELSE (
-            IF "%q_action_3%" == "normalAttack" (
-                SET q_action_3=EMPTY
-                REM Perform Player attack logic.
-                GOTO :PLAYER_STAMINA_CALCULATE
-            ) ELSE IF %q_action_3% == "playerRecover" (
-                SET q_action_3=EMPTY
-                REM Recover stamina & health.
-                GOTO :PLAYER_RECOVER
-            )
-        )
     ) ELSE (
-        IF "%q_action_2%" == "normalAttack" (
-            SET q_action_2=EMPTY
-            REM Perform Player attack logic.
-            GOTO :PLAYER_STAMINA_CALCULATE
-        ) ELSE IF "%q_action_2%" == "playerRecover" (
-            SET q_action_2=EMPTY
-            REM Recover stamina & health.
-            GOTO :PLAYER_RECOVER
+        REM TURN_LOOP has not reached the maximum of 3, continue this loop.
+        ECHO %TURN_LOOP%, q_action_1 has determined the loop to have not reached the limit. >> CombatEngine-log.txt
+        ECHO %TURN_LOOP%
+        PAUSE
+        IF "%q_action_2%" == "EMPTY" (
+            REM Increments the TURN_LOOP variable by one, which is used to end this loop when all action slots are empty.
+            SET /A TURN_LOOP=!TURN_LOOP! +1
+            REM Checks if the maximum amount of loops has been reached (3).
+            IF %TURN_LOOP% GEQ 3 (
+                REM TURN_LOOP has reached the maximum of 3, terminate this loop.
+                SET TURN_LOOP=0
+                GOTO :EBS
+            ) ELSE (
+                REM TURN_LOOP has not reached the maximum of 3, continue this loop.
+                ECHO %TURN_LOOP%, q_action_2 has determined the loop to have not reached the limit. >> CombatEngine-log.txt
+                ECHO %TURN_LOOP%
+                PAUSE
+                IF "%q_action_3%" == "EMPTY" (
+                    REM Increments the TURN_LOOP variable by one, which is used to end this loop when all action slots are empty.
+                    SET /A TURN_LOOP=!TURN_LOOP +1
+                    REM Checks if the maximum amount of loops has been reached (3).
+                    IF %TURN_LOOP% GEQ 3 (
+                        REM TURN_LOOP has reached the maximum of 3, terminate this loop.
+                        SET TURN_LOOP=0
+                        GOTO :EBS
+                    ) ELSE (
+                        REM TURN_LOOP has not reached the maximum of 3, continue this loop.
+                        ECHO %TURN_LOOP%
+                        ECHO %TURN_LOOP%, q_action_3 has determined the loop to have not reached the limit. >> CombatEngine-log.txt
+                        PAUSE
+                    )
+
+                ) ELSE (
+                    REM q_action_3 is not empty, determine the action.
+                    IF "%q_action_3%" == "normalAttack" (
+                        REM Increments the TURN_LOOP variable by 1.
+                        SET /A TURN_LOOP=!TURN_LOOP! +1
+                        REM Normal player attack in queue position, perform the attack.
+                        SET q_action_3=EMPTY
+                        GOTO :PLAYER_STAMINA_CALCULATE
+                    ) ELSE (
+                        REM Invalid String error.
+                        ECHO Uh oh. Combat Error encountered an issue. %q_action_1% does not contain a valid string. Sending Player to Error Handler. >> CombatEngine-Log.txt
+                        SET errorType=invalidString
+                        GOTO :ERROR_HANDLER
+                    )
+                )
+            )
+        ) ELSE (
+            REM q_action_2 is not empty, determine the action.
+            IF "%q_action_2%" == "normalAttack" (
+                REM Normal player attack in queue position, perform the attack.
+                REM Increments the TURN_LOOP variable by 1.
+                SET /A TURN_LOOP=!TURN_LOOP! +1
+                SET q_action_2=EMPTY
+                GOTO :PLAYER_STAMINA_CALCULATE
+            ) ELSE (
+                REM Invalid String error.
+                ECHO Uh oh. Combat Error encountered an issue. %q_action_1% does not contain a valid string. Sending Player to Error Handler. >> CombatEngine-Log.txt
+                SET errorType=invalidString
+                GOTO :ERROR_HANDLER
+            )
         )
     )
 ) ELSE (
+    REM q_action_1 is not empty, determine the action.
     IF "%q_action_1%" == "normalAttack" (
+        REM Increments the TURN_LOOP variable by 1.
+        SET /A TURN_LOOP=!TURN_LOOP! +1
+        REM Normal player attack in queue position, perform the attack.
         SET q_action_1=EMPTY
-        REM Perform Player attack logic.
         GOTO :PLAYER_STAMINA_CALCULATE
-    ) ELSE IF "%q_action_1%" == "playerRecover" (
-        SET q_action_1=EMPTY
-        REM Recover stamina & health.
-        GOTO :PLAYER_RECOVER
+    ) ELSE (
+        REM Invalid String error.
+        ECHO Uh oh. Combat Error encountered an issue. %q_action_1% does not contain a valid string. Sending Player to Error Handler. >> CombatEngine-Log.txt
+        SET errorType=invalidString
+        GOTO :ERROR_HANDLER
     )
 )
 
 REM Calculate the Player's stamina.
+:PLAYER_STAMINA_CALCULATE
 IF %player_stamina% LSS %player_stamina_equip% (
     REM Player does not have enough stamina to perform this attack.
     SET player_message=You try to raise your weapon, but your pathetic noodle arms give out.
@@ -162,6 +200,7 @@ IF %PAR% LSS 7 (
 )
 
 REM Calculate the Player's armor.
+:PLAYER_ARMOR_CALCULATE
 IF %player_armor_calculated% EQU 1 (
     REM Player armor has already been calculated.
     GOTO :ENEMY_STAMINA_CALCULATE
@@ -217,6 +256,11 @@ REM Opens the Player's inventory. CECALL tells Inventory Viewer which script cal
 SET CE7CALL=1
 CALL "%cd%\data\functions\Inventory Viewer.bat"
 GOTO :EBS
+
+REM Handles those pesky errors.
+:ERROR_HANDLER
+CALL "%cd%\data\functions\Error Handler.bat"
+EXIT
 
 REM Performs some cleanup
 :EXIT
