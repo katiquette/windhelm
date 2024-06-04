@@ -1,5 +1,6 @@
 @ECHO OFF
 TITLE (WINDHELM) Inventory Viewer ^| %player_name% the %player_class%
+REM Somehow more of a nightmare than SLoP!
 
 REM Access to submenus.
 :MM
@@ -14,16 +15,95 @@ ECHO ^| COINS: %player_coins% ^| XP: %player_xp% ^| HP: %player_health% ^| ARMOR
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| PARTY 1: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka%
 ECHO +--------------------------------------------------------------------------------------------------+
-ECHO ^| [1 / WEAPONS ] ^| [2 / TONICS ] ^| [3 / ARMOR ] ^| [4 / SHIELDS ] ^| [5 / BOOKS AND SCROLLS ]        +
-ECHO ^| [E / EXIT ]                                                                                      +
+ECHO %player.inventory_slot_1% / %player.inventory_slot_1_stack% ^| ECHO %player.inventory_slot_6% / %player.inventory_slot_6_stack% ^| ECHO %player.inventory_slot_11% / %player.inventory_slot_11_stack%
+ECHO %player.inventory_slot_2% / %player.inventory_slot_2_stack% ^| ECHO %player.inventory_slot_7% / %player.inventory_slot_7_stack% ^| ECHO %player.inventory_slot_12% / %player.inventory_slot_12_stack%
+ECHO %player.inventory_slot_3% / %player.inventory_slot_3_stack% ^| ECHO %player.inventory_slot_8% / %player.inventory_slot_8_stack% ^| ECHO %player.inventory_slot_13% / %player.inventory_slot_13_stack%
+ECHO %player.inventory_slot_4% / %player.inventory_slot_4_stack% ^| ECHO %player.inventory_slot_9% / %player.inventory_slot_9_stack% ^| ECHO %player.inventory_slot_14% / %player.inventory_slot_14_stack%
+ECHO %player.inventory_slot_5% / %player.inventory_slot_5_stack% ^| ECHO %player.inventory_slot_10% / %player.inventory_slot_10_stack% ^| ECHO %player.inventory_slot_15% / %player.inventory_slot_15_stack%
 ECHO +--------------------------------------------------------------------------------------------------+
-CHOICE /C 12345E /N /M ">"
-IF ERRORLEVEL 6 GOTO :EOF
-IF ERRORLEVEL 5 GOTO :BOOKS_AND_SCROLLS
-IF ERRORLEVEL 4 GOTO :SHIELDS
-IF ERRORLEVEL 3 GOTO :ARMOR
-IF ERRORLEVEL 2 GOTO :tonics
-IF ERRORLEVEL 1 GOTO :WEAPONS
+ECHO ^| [1 / EQUIP ITEM ] ^| [2 / USE ITEM ] ^| [3 / INSPECT ITEM ] ^| [4 / DISCARD ITEM ] ^| [E / EXIT ]
+ECHO +--------------------------------------------------------------------------------------------------+
+CHOICE /C 1234E /N /M ">"
+IF ERRORLEVEL 5 GOTO :EOF
+IF ERRORLEVEL 4 GOTO :DISCARD_ITEM
+IF ERRORLEVEL 3 GOTO :INSPECT_ITEM
+IF ERRORLEVEL 2 GOTO :USE_ITEM
+IF ERRORLEVEL 1 GOTO :EQUIP_ITEM
+
+REM Attemps to equip an item from a specificed slot.
+:EQUIP_ITEM
+CLS
+ECHO.
+TYPE "%cd%\data\assets\ui\inventory.txt"
+ECHO.
+ECHO %displayMessage%
+ECHO Select an item to equip.
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO %player.inventory_slot_1% / %player.inventory_slot_1_stack% ^| ECHO %player.inventory_slot_6% / %player.inventory_slot_6_stack% ^| ECHO %player.inventory_slot_11% / %player.inventory_slot_11_stack%
+ECHO %player.inventory_slot_2% / %player.inventory_slot_2_stack% ^| ECHO %player.inventory_slot_7% / %player.inventory_slot_7_stack% ^| ECHO %player.inventory_slot_12% / %player.inventory_slot_12_stack%
+ECHO %player.inventory_slot_3% / %player.inventory_slot_3_stack% ^| ECHO %player.inventory_slot_8% / %player.inventory_slot_8_stack% ^| ECHO %player.inventory_slot_13% / %player.inventory_slot_13_stack%
+ECHO %player.inventory_slot_4% / %player.inventory_slot_4_stack% ^| ECHO %player.inventory_slot_9% / %player.inventory_slot_9_stack% ^| ECHO %player.inventory_slot_14% / %player.inventory_slot_14_stack%
+ECHO %player.inventory_slot_5% / %player.inventory_slot_5_stack% ^| ECHO %player.inventory_slot_10% / %player.inventory_slot_10_stack% ^| ECHO %player.inventory_slot_15% / %player.inventory_slot_15_stack%
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO ^| [1 / SLOT 1 ] ^| [2 / SLOT 2 ] ^| [3 / SLOT 3 ] ^| [4 / SLOT 4 ] ^| [5 / SLOT 5 ]
+ECHO ^| [6 / SLOT 6 ] ^| [7 / SLOT 7 ] ^| [8 / SLOT 8 ] ^| [9 / SLOT 9 ] ^| [N / NEXT PAGE ] ^| [E / EXIT ]
+ECHO +--------------------------------------------------------------------------------------------------+
+CHOICE /C 123456789NE /N /M ">"
+IF ERRORLEVEL 11 GOTO :MM
+IF ERRORLEVEL 10 GOTO :EQUIP_ITEM_PAGE_2
+IF ERRORLEVEL 9 GOTO :ATTEMPT_EQUIP_9
+IF ERRORLEVEL 8 GOTO :ATTEMPT_EQUIP_8
+IF ERRORLEVEL 7 GOTO :ATTEMPT_EQUIP_7
+IF ERRORLEVEL 6 GOTO :ATTEMPT_EQUIP_6
+IF ERRORLEVEL 5 GOTO :ATTEMPT_EQUIP_5
+IF ERRORLEVEL 4 GOTO :ATTEMPT_EQUIP_4
+IF ERRORLEVEL 3 GOTO :ATTEMPT_EQUIP_3
+IF ERRORLEVEL 2 GOTO :ATTEMPT_EQUIP_2
+IF ERRORLEVEL 1 GOTO :ATTEMPT_EQUIP_1
+
+:EQUIP_ITEM_PAGE_2
+CLS
+ECHO.
+TYPE "%cd%\data\assets\ui\inventory.txt"
+ECHO.
+ECHO %displayMessage%
+ECHO Select an item to equip.
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO %player.inventory_slot_1% / %player.inventory_slot_1_stack% ^| ECHO %player.inventory_slot_6% / %player.inventory_slot_6_stack% ^| ECHO %player.inventory_slot_11% / %player.inventory_slot_11_stack%
+ECHO %player.inventory_slot_2% / %player.inventory_slot_2_stack% ^| ECHO %player.inventory_slot_7% / %player.inventory_slot_7_stack% ^| ECHO %player.inventory_slot_12% / %player.inventory_slot_12_stack%
+ECHO %player.inventory_slot_3% / %player.inventory_slot_3_stack% ^| ECHO %player.inventory_slot_8% / %player.inventory_slot_8_stack% ^| ECHO %player.inventory_slot_13% / %player.inventory_slot_13_stack%
+ECHO %player.inventory_slot_4% / %player.inventory_slot_4_stack% ^| ECHO %player.inventory_slot_9% / %player.inventory_slot_9_stack% ^| ECHO %player.inventory_slot_14% / %player.inventory_slot_14_stack%
+ECHO %player.inventory_slot_5% / %player.inventory_slot_5_stack% ^| ECHO %player.inventory_slot_10% / %player.inventory_slot_10_stack% ^| ECHO %player.inventory_slot_15% / %player.inventory_slot_15_stack%
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO ^| [1 / SLOT 10 ] ^| [2 / SLOT 11 ] ^| [3 / SLOT 12 ] ^| [4 / SLOT 13 ] ^| [5 / SLOT 14 ]
+ECHO ^| [6 / SLOT 15 ] ^| [N / LAST PAGE ] ^| [E / EXIT ]
+ECHO +--------------------------------------------------------------------------------------------------+
+CHOICE /C 123456NE /N /M ">"
+IF ERRORLEVEL 7 GOTO :MM
+IF ERRORLEVEL 7 GOTO :EQUIP_ITEM
+IF ERRORLEVEL 6 GOTO :ATTEMPT_EQUIP_15
+IF ERRORLEVEL 5 GOTO :ATTEMPT_EQUIP_14
+IF ERRORLEVEL 4 GOTO :ATTEMPT_EQUIP_13
+IF ERRORLEVEL 3 GOTO :ATTEMPT_EQUIP_12
+IF ERRORLEVEL 2 GOTO :ATTEMPT_EQUIP_11
+IF ERRORLEVEL 1 GOTO :ATTEMPT_EQUIP_10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+REM Ignore all dis shit for now
 
 REM Weapon selection submenu.
 :WEAPONS
