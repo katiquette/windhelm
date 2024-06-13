@@ -1,9 +1,7 @@
 @ECHO OFF
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
-REM Exploration Engine beta version 1.1.0 [ ee1-240525-B1.BE2.GU1 ]
-REM For clarity: 250524 (Date) B2 (Build 1) B2R (Beta 1 Release) GU1 (General Update 1)
-REM This version of Windhelm was made by Midnight Midriff (Original Author).
-REM https://github.com/MidnightMidriff/exploration-engine
+REM Exploration Engine Beta Version 1.1.0.
+REM Extra Build Information: ee1-240525-B1.BE1.GU1
 REM This software is licensed under GPL-3.0-or-later.
 
 REM Main Menu. Access to hubs/shops and locations to explore.
@@ -32,8 +30,8 @@ IF ERRORLEVEL 1 GOTO :EXPLORE_IRIDESCENT_FOREST
 REM Attempts to encounter an enemy or NPC. Low level enemies can be found here.
 :EXPLORE_IRIDESCENT_FOREST
 SET bl=Iridescent Forest
-SET /A A=%RANDOM% %%20
-IF %A% GTR 15 (
+SET /A A=%RANDOM% %%50
+IF %A% GTR 30 (
     REM Clarke Blackwell encounter.
     IF %clarke_blackwell_added_party% == true (
         SET displayMessage=You didn't find anything.
@@ -47,22 +45,22 @@ IF %A% GTR 15 (
     REM Nothing found.
     SET displayMessage=You didn't find anything.
     GOTO :MAIN
-) ELSE IF %A% EQU 4 (
+) ELSE IF %A% LEQ 4 (
     REM Found 25 coins.
     SET /A COINS=!COINS! +25
     SET displayMessage=Found 25 coins!
     GOTO :MAIN
-) ELSE IF %A% EQU 5 (
+) ELSE IF %A% LEQ 5 (
     REM Bandit encounter.
     set currentEnemy=iBandit
     CALL "%cd%\data\Combat Engine\scripts\evie.bat"
     GOTO :MAIN
-) ELSE IF %A% EQU 6 (
+) ELSE IF %A% LEQ 6 (
     REM Jester encounter.
     SET currentEnemy=iJester
     CALL "%cd%\data\Combat Engine\scripts\evie.bat"
     GOTO :MAIN
-) ELSE IF %A% EQU 7 (
+) ELSE IF %A% LEQ 7 (
     REM Gnome encounter.
     SET currentEnemy=iGnome
     CALL "%cd%\data\Combat Engine\scripts\evie.bat"
@@ -86,7 +84,7 @@ IF %A% GTR 15 (
     REM Found nothing.
     SET displayMessage=You didn't find anything.
     GOTO :MAIN
-) ELSE IF %A% EQU 12 (
+) ELSE IF %A% GTR 25 (
     REM Gabriel Aberdeen encounter.
     IF %gabrial_aberdeen_added_party% == true (
         SET displayMessage=You didn't find anything.
