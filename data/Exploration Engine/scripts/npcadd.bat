@@ -1,5 +1,4 @@
 @ECHO OFF
-REM Npc add logic. Version 1.0 (240228) - for Windhelm Build 2 "Bottle o' Features".
 
 REM Check which NPC the Player is attempting to recruit.
 IF %NE% == ClarkeBlackwell (
@@ -21,15 +20,13 @@ REM Clarke Blackwell menu selection.
 MODE con: cols=126 lines=21
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\npcs\clarkeblackwell.txt"
+TYPE "%cd%\data\assets\npcs\clarkeblackwell.txt"
 ECHO.
 ECHO %displayMessage%
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p%
-ECHO +----------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| PARTY 1: %PM1name% ^| HP: %PM1HP% ^| ATK: %PM1ATK% ^| STM: %PM1STM% ^| MGK: %PM1MGK%
-ECHO ^| PARTY 2: %PM2name% ^| HP: %PM2HP% ^| ATK: %PM2ATK% ^| STM: %PM2STM% ^| MGK: %PM2MGK%
-ECHO ^| PARTY 3: %PM3name% ^| HP: %PM3HP% ^| ATK: %PM3ATK% ^| STM: %PM3STM% ^| MGK: %PM3MGK%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| LEVEL: %player_level% ^| XP: %player_xp% ^| COINS: %player_coins% ^| LUNIS: %player_lunis%
+ECHO +--------------------------------------------------------------------------------------------------------------------------------+
+ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka% ^| LVL: %follower_level%
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
 ECHO + [1 / RECRUIT CLARKE BLACKWELL ] ^| [E / GO BACK ]                                                                           +
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
@@ -73,16 +70,14 @@ REM Select the slot to place Clarke Blackwell.
 MODE con: cols=126 lines=22
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\pm_ss.txt"
+TYPE "%cd%\data\assets\ui\pm_ss.txt"
 ECHO.
 ECHO Select a slot for Clarke Blackwell.
 ECHO %displayMessage%
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p%
-ECHO +----------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| PARTY 1: %PM1name% ^| HP: %PM1HP% ^| ATK: %PM1ATK% ^| STM: %PM1STM% ^| MGK: %PM1MGK%
-ECHO ^| PARTY 2: %PM2name% ^| HP: %PM2HP% ^| ATK: %PM2ATK% ^| STM: %PM2STM% ^| MGK: %PM2MGK%
-ECHO ^| PARTY 3: %PM3name% ^| HP: %PM3HP% ^| ATK: %PM3ATK% ^| STM: %PM3STM% ^| MGK: %PM3MGK%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| LEVEL: %player_level% ^| XP: %player_xp% ^| COINS: %player_coins% ^| LUNIS: %player_lunis%
+ECHO +--------------------------------------------------------------------------------------------------------------------------------+
+ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka% ^| LVL: %follower_level%
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
 ECHO + [1 / SLOT 1 ] ^| [2 / SLOT 2 ] ^| [3 / SLOT 3 ] ^| [E / GO BACK ]                                                             +
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
@@ -155,11 +150,9 @@ TYPE "%cd%\data\ascii\npcs\garymorcant.txt"
 ECHO.
 ECHO %displayMessage%
 ECHO +-------------------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p%
-ECHO +-------------------------------------------------------------------------------------------------------------------+
-ECHO ^| PARTY 1: %PM1name% ^| HP: %PM1HP% ^| ATK: %PM1ATK% ^| STM: %PM1STM% ^| MGK: %PM1MGK%
-ECHO ^| PARTY 2: %PM2name% ^| HP: %PM2HP% ^| ATK: %PM2ATK% ^| STM: %PM2STM% ^| MGK: %PM2MGK%
-ECHO ^| PARTY 3: %PM3name% ^| HP: %PM3HP% ^| ATK: %PM3ATK% ^| STM: %PM3STM% ^| MGK: %PM3MGK%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| LEVEL: %player_level% ^| XP: %player_xp% ^| COINS: %player_coins% ^| LUNIS: %player_lunis%
+ECHO +--------------------------------------------------------------------------------------------------------------------------------+
+ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka% ^| LVL: %follower_level%
 ECHO +-------------------------------------------------------------------------------------------------------------------+
 ECHO + [1 / RECRUIT GARY MORCANT ] ^| [E / GO BACK ]                                                                      +
 ECHO +-------------------------------------------------------------------------------------------------------------------+
@@ -200,16 +193,14 @@ REM Select the slot to place Gary Morcant.
 MODE con: cols=126 lines=22
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\pm_ss.txt"
+TYPE "%cd%\data\assets\ui\pm_ss.txt"
 ECHO.
 ECHO Select a slot for Gary Morcant.
 ECHO %displayMessage%
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p%
-ECHO +----------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| PARTY 1: %PM1name% ^| HP: %PM1HP% ^| ATK: %PM1ATK% ^| STM: %PM1STM% ^| MGK: %PM1MGK%
-ECHO ^| PARTY 2: %PM2name% ^| HP: %PM2HP% ^| ATK: %PM2ATK% ^| STM: %PM2STM% ^| MGK: %PM2MGK%
-ECHO ^| PARTY 3: %PM3name% ^| HP: %PM3HP% ^| ATK: %PM3ATK% ^| STM: %PM3STM% ^| MGK: %PM3MGK%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| LEVEL: %player_level% ^| XP: %player_xp% ^| COINS: %player_coins% ^| LUNIS: %player_lunis%
+ECHO +--------------------------------------------------------------------------------------------------------------------------------+
+ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka% ^| LVL: %follower_level%
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
 ECHO + [1 / SLOT 1 ] ^| [2 / SLOT 2 ] ^| [3 / SLOT 3 ] ^| [E / GO BACK ]                                                             +
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
@@ -282,11 +273,9 @@ TYPE "%cd%\data\ascii\npcs\gabrielaberdeen.txt"
 ECHO.
 ECHO %displayMessage%
 ECHO +----------------------------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p%
-ECHO +----------------------------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| PARTY 1: %PM1name% ^| HP: %PM1HP% ^| ATK: %PM1ATK% ^| STM: %PM1STM% ^| MGK: %PM1MGK%
-ECHO ^| PARTY 2: %PM2name% ^| HP: %PM2HP% ^| ATK: %PM2ATK% ^| STM: %PM2STM% ^| MGK: %PM2MGK%
-ECHO ^| PARTY 3: %PM3name% ^| HP: %PM3HP% ^| ATK: %PM3ATK% ^| STM: %PM3STM% ^| MGK: %PM3MGK%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| LEVEL: %player_level% ^| XP: %player_xp% ^| COINS: %player_coins% ^| LUNIS: %player_lunis%
+ECHO +--------------------------------------------------------------------------------------------------------------------------------+
+ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka% ^| LVL: %follower_level%
 ECHO +----------------------------------------------------------------------------------------------------------------------------------------------+
 ECHO + [1 / RECRUIT GABRIEL ABERDEEN ] ^| [E / GO BACK ]                                                                                             +
 ECHO +----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -327,16 +316,14 @@ REM Select the slot to place Gabriel Aberdeen.
 MODE con: cols=126 lines=22
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\pm_ss.txt"
+TYPE "%cd%\data\assets\ui\pm_ss.txt"
 ECHO.
 ECHO Select a slot for Gabriel  Aberdeen.
 ECHO %displayMessage%
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p%
-ECHO +----------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| PARTY 1: %PM1name% ^| HP: %PM1HP% ^| ATK: %PM1ATK% ^| STM: %PM1STM% ^| MGK: %PM1MGK%
-ECHO ^| PARTY 2: %PM2name% ^| HP: %PM2HP% ^| ATK: %PM2ATK% ^| STM: %PM2STM% ^| MGK: %PM2MGK%
-ECHO ^| PARTY 3: %PM3name% ^| HP: %PM3HP% ^| ATK: %PM3ATK% ^| STM: %PM3STM% ^| MGK: %PM3MGK%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| LEVEL: %player_level% ^| XP: %player_xp% ^| COINS: %player_coins% ^| LUNIS: %player_lunis%
+ECHO +--------------------------------------------------------------------------------------------------------------------------------+
+ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka% ^| LVL: %follower_level%
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
 ECHO + [1 / SLOT 1 ] ^| [2 / SLOT 2 ] ^| [3 / SLOT 3 ] ^| [E / GO BACK ]                                                             +
 ECHO +----------------------------------------------------------------------------------------------------------------------------+
