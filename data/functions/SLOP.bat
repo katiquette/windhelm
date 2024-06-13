@@ -32,7 +32,39 @@ SET GA_HEL=175
 SET GA_DMG=13
 SET GA_STM=145
 SET GA_MGK=50
-GOTO :callCheck
+
+REM Default inventory grid.
+SET player.inventory_slot_1=EMPTY
+SET player.inventory_slot_2=EMPTY
+SET player.inventory_slot_3=EMPTY
+SET player.inventory_slot_4=EMPTY
+SET player.inventory_slot_5=EMPTY
+SET player.inventory_slot_6=EMPTY
+SET player.inventory_slot_7=EMPTY
+SET player.inventory_slot_8=EMPTY
+SET player.inventory_slot_9=EMPTY
+SET player.inventory_slot_10=EMPTY
+SET player.inventory_slot_11=EMPTY
+SET player.inventory_slot_12=EMPTY
+SET player.inventory_slot_13=EMPTY
+SET player.inventory_slot_14=EMPTY
+SET player.inventory_slot_15=EMPTY
+REM Default inventory item stack size.
+SET player.inventory_slot_1_stack=0
+SET player.inventory_slot_2_stack=0
+SET player.inventory_slot_3_stack=0
+SET player.inventory_slot_4_stack=0
+SET player.inventory_slot_5_stack=0
+SET player.inventory_slot_6_stack=0
+SET player.inventory_slot_7_stack=0
+SET player.inventory_slot_8_stack=0
+SET player.inventory_slot_9_stack=0
+SET player.inventory_slot_10_stack=0
+SET player.inventory_slot_11_stack=0
+SET player.inventory_slot_12_stack=0
+SET player.inventory_slot_13_stack=0
+SET player.inventory_slot_14_stack=0
+SET player.inventory_slot_15_stack=0
 
 REM Check SLoPr for the desired action.
 :callCheck
@@ -51,6 +83,7 @@ IF %SLOPr% == SAVE (
 REM Saves Player & Merchant data.
 :saveData
 (
+ECHO %player_name%
 ECHO %player_health%
 ECHO %player_stamina%
 ECHO %player_magicka%
@@ -177,6 +210,7 @@ GOTO :EOF
 REM Loads Player stats.
 :loadData
 (
+SET /P player_name=
 SET /P player_health=
 SET /P player_stamina=
 SET /P player_magicka=
