@@ -1,22 +1,19 @@
 @ECHO OFF
 TITLE (Rockwinn Plaza) - Rockwinn Plaza ^| %player_name% the %player_class%
-REM Rockwinn Plaza Version 2.0 (240314) - for Windhelm build 2 "Bottle o' Features"
 
 REM Main Menu.
 :MAIN
 MODE con: cols=127 lines=22
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\rwp.txt"
+TYPE "%cd%\data\assets\ui\rwp.txt"
 ECHO.
 ECHO You enter the bustling street, inspecting each vendors stall closely.
 ECHO %displayMessage%
 ECHO +-----------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p% ^| COINS: %COINS%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| COINS: %player_coins% ^| XP: %player_xp% ^| LUNIS: %player_lunis%
 ECHO +-----------------------------------------------------------------------------------------------------------------------------+
-ECHO ^| PARTY 1: %PM1name% ^| HP: %PM1HP% ^| ATK: %PM1ATK% ^| STM: %PM1STM% ^| MGK: %PM1MGK%
-ECHO ^| PARTY 2: %PM2name% ^| HP: %PM2HP% ^| ATK: %PM2ATK% ^| STM: %PM2STM% ^| MGK: %PM2MGK%
-ECHO ^| PARTY 3: %PM3name% ^| HP: %PM3HP% ^| ATK: %PM3ATK% ^| STM: %PM3STM% ^| MGK: %PM3MGK%
+ECHO ^| PARTY 1: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka%
 ECHO +-----------------------------------------------------------------------------------------------------------------------------+
 ECHO + [1 / ALCHEMIST ] ^| [2 / ARMORER ] ^| [3 / BLACKSMITH ] ^| [4 / LOREKEEPER ] ^| [5 / WIZARD ] ^| [E / LEAVE ]                    +
 ECHO +-----------------------------------------------------------------------------------------------------------------------------+
@@ -40,7 +37,7 @@ ECHO.
 ECHO What can I do for you, Shard?
 ECHO %displayMessage%
 ECHO +--------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p% ^| COINS: %COINS%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| COINS: %player_coins% ^| XP: %player_xp% ^| LUNIS: %player_lunis%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| HEALING TONIC: %hTonic_s%, PRICE: %hTonic_p%
 ECHO ^| STAMINA TONIC: %sTonic_s%, PRICE: %sTonic_p%
@@ -105,7 +102,7 @@ ECHO.
 ECHO What can I do for you, Shard?
 ECHO %displayMessage%
 ECHO +---------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p% ^| COINS: %COINS%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| COINS: %player_coins% ^| XP: %player_xp% ^| LUNIS: %player_lunis%
 ECHO +---------------------------------------------------------------------------------------------------------+
 ECHO ^| CACTUS ARMOR: %cactusArmor_s%, PRICE: %cactusArmor_p% ^| SCALED ARMOR: %scaledArmor_s%, PRICE: %scaledArmor_p% ^| SILVER ARMOR: %silverArmor_s%, PRICE: %silverArmor_p%
 ECHO ^| STONE ARMOR: %stoneArmor_s%, PRICE: %stoneArmor_p%  ^| IRON ARMOR: %ironArmor_s%, PRICE: %ironArmor_p%     ^| GOLD ARMOR: %goldArmor_s%, PRICE: %goldArmor_p%
@@ -242,7 +239,7 @@ ECHO.
 ECHO What can I do for you, Shard?
 ECHO %displayMessage%
 ECHO +-----------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p% ^| COINS: %COINS%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| COINS: %player_coins% ^| XP: %player_xp% ^| LUNIS: %player_lunis%
 ECHO +-----------------------------------------------------------------------------------------------------------+
 ECHO ^| SHORT SWORD: %sSword_s%, PRICE: %sSword_p% ^| MACE: %mace_s%, PRICE: %mace_p%
 ECHO ^| LONG SWORD: %lSword_s%, PRICE: %lSword_p%  ^| WOODEN BOW: %wBow_s%, PRICE: %wBow_p%
@@ -335,16 +332,15 @@ ECHO.
 ECHO What can I do for you, Shard?
 ECHO %displayMessage%
 ECHO +-------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p% ^| COINS: %COINS%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| COINS: %player_coins% ^| XP: %player_xp% ^| LUNIS: %player_lunis%
 ECHO +-------------------------------------------------------------------------------------------------+
 ECHO ^| TRAVELER'S JOURNAL: %tJournal_s%, PRICE: %tJournal_p%
 ECHO ^| MERHCANT'S GUIDE: %mGuide_s%, PRICE: %mGuide_p%
 ECHO +-------------------------------------------------------------------------------------------------+
-ECHO + [1 / TRAVELER'S GUIDE ] ^| [2 / MERCHANT'S GUIDE ] ^| [3 / BROWSE MAPS ] ^| [E / GO BACK ]         +
+ECHO + [1 / TRAVELER'S GUIDE ] ^| [2 / MERCHANT'S GUIDE ] ^| [E / GO BACK ]         +
 ECHO +-------------------------------------------------------------------------------------------------+
-CHOICE /C 123E /N /M ">"
-IF ERRORLEVEL 4 GOTO :MAIN
-IF ERRORLEVEL 3 GOTO :LOREKEEPER_BUY_MAPS
+CHOICE /C 12E /N /M ">"
+IF ERRORLEVEL 3 GOTO :MAIN
 IF ERRORLEVEL 2 GOTO :LOREKEEPER_BUY_MERCHANTSGUIDE
 IF ERRORLEVEL 1 GOTO :LOREKEEPER_BUY_TRAVELERSGUIDE
 
@@ -374,44 +370,6 @@ IF %coins% LSS %mGuide_p% (
     GOTO :RWP_LOREKEEPER
 )
 
-REM List of available maps to purchase. Used for unlocking new areas to explore.
-:LOREKEEPER_BUY_MAPS
-TITLE (Rockwinn Plaza) - Lorekeeper Maps ^| %player_name% the %player_class%
-MODE con: cols=99 lines=20
-REM --
-ECHO.
-TYPE "%cd%\data\ascii\npcs\lorekeeper.txt"
-ECHO.
-ECHO.
-ECHO What can I do for you, Shard?
-ECHO %displayMessage%
-ECHO +-------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p% ^| COINS: %COINS%
-ECHO +-------------------------------------------------------------------------------------------------+
-ECHO ^| RUINS: %ruinsMap_s%, PRICE: %ruinsMap_p%
-ECHO +-------------------------------------------------------------------------------------------------+
-ECHO + [1 / RUINS MAP ] ^| [E / GO BACK ]                                                               +
-ECHO +-------------------------------------------------------------------------------------------------+
-CHOICE /C 1E /N /M ">"
-IF ERRORLEVEL 2 GOTO :RWP_LOREKEEPER
-IF ERRORLEVEL 1 GOTO :LOREKEEPER_BUY_RUINSMAP
-
-REM Attempt to purchase the Ruins map.
-:LOREKEEPER_BUY_RUINSMAP
-IF %coins% LSS %ruinsMap_p% (
-    SET displayMessage=You can't afford this set.
-    GOTO :LOREKEEPER_BUY_MAPS
-) ELSE (
-    SET /A COINS=!COINS! -%ruinsMap_p%
-    SET /A ruinsMap_s=!ruinsMap_s! -1
-    SET ruins_unlocked=1
-    SET displayMessage=Unlocked The Ruins for %ruinsMap_p% coins.
-    REM Save the game.
-    SET SLOPr=SAVE
-    CALL "%cd%\data\functions\SLOP.bat"
-    GOTO :LOREKEEPER_BUY_MAPS
-)
-
 REM Wizard Vendor.
 :RWP_WIZARD
 TITLE (Rockwinn Plaza) - Wizard ^| %player_name% the %player_class%
@@ -424,7 +382,7 @@ ECHO.
 ECHO What can I do for you, Shard?
 ECHO %displayMessage%
 ECHO +-------------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p% ^| COINS: %COINS%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| COINS: %player_coins% ^| XP: %player_xp% ^| LUNIS: %player_lunis%
 ECHO +-------------------------------------------------------------------------------------------------------------+
 ECHO ^| BASIC ROBES: %bRobes_s%, PRICE: %bRobes_p%
 ECHO ^| INTERMEDIATE ROBES: %iRobes_s%, PRICE: %iRobes_p%
@@ -490,7 +448,7 @@ ECHO.
 ECHO Which skill would you like to improve?
 ECHO %displayMessage%
 ECHO +----------------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %HP% ^| STM: %stamina% ^| ATK: %player_damage% ^| AMR: %armor_equip% ^| MGK: %magicka% ^| AP %player_action_p% ^| COINS: %COINS% ^| LEVELS: %LEVELS%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| COINS: %player_coins% ^| XP: %player_xp% ^| LUNIS: %player_lunis%
 ECHO +----------------------------------------------------------------------------------------------------------------+
 ECHO ^| DAMAGE:  %damage_skill%,  COST:  6 LEVELS
 ECHO ^| SPEECH:  %speech_skill%,  COST:  9 LEVELS
