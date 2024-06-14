@@ -1,7 +1,7 @@
 @ECHO OFF
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 REM Exploration Engine Beta Version 1.1.0.
-REM Extra Build Information: ee1-240525-B1.BE1.GU1
+REM Extra Build Information: ee1-240613-B1.BE1.GU1
 REM This software is licensed under GPL-3.0-or-later.
 
 REM Main Menu. Access to hubs/shops and locations to explore.
@@ -29,10 +29,36 @@ IF ERRORLEVEL 1 GOTO :EXPLORE_IRIDESCENT_FOREST
 
 REM Attempts to encounter an enemy or NPC. Low level enemies can be found here.
 :EXPLORE_IRIDESCENT_FOREST
-SET bl=Iridescent Forest
-SET /A A=%RANDOM% %%50
-IF %A% GTR 45 (
-    REM Clarke Blackwell encounter.
+SET /A EONC=%RANDOM% %%25
+IF %EONC% GTR 23 (
+    GOTO :ROLL_NPC
+) ELSE (
+    GOTO :ROLL_ENEMY
+)
+
+:ROLL_ENEMY
+SET /A A=%RANDOM% %%100
+IF %A% GEQ 80 (
+    SET currentEnemy=iHunter
+    CALL "%cd%\data\Combat Engine\scripts\evie.bat"
+    GOTO :MAIN
+) ELSE IF %A% GEQ 60 (
+    SET currentEnemy=iJester
+    CALL "%cd%\data\Combat Engine\scripts\evie.bat"
+    GOTO :MAIN
+) ELSE IF %A% GEQ 55 (
+    SET currentEnemy=iGnome
+    CALL "%cd%\data\Combat Engine\scripts\evie.bat"
+    GOTO :MAIN
+) ELSE (
+    SET currentEnemy=iGoblin
+    CALL "%cd%\data\Combat Engine\scripts\evie.bat"
+    GOTO :MAIN
+)
+
+:ROLL_NPC
+SET /A N=%RANDOM% %%100
+IF %N% GEQ 70 (
     IF %clarke_blackwell_added_party% == true (
         SET displayMessage=You didn't find anything.
         GOTO :MAIN
@@ -41,51 +67,7 @@ IF %A% GTR 45 (
         CALL "%cd%\data\Exploration Engine\scripts\npcadd.bat"
         GOTO :MAIN
     )
-) ELSE IF %A% LSS 3 (
-    REM Nothing found.
-    SET displayMessage=You didn't find anything.
-    GOTO :MAIN
-) ELSE IF %A% LEQ 4 (
-    REM Found 25 coins.
-    SET /A COINS=!COINS! +25
-    SET displayMessage=Found 25 coins!
-    GOTO :MAIN
-) ELSE IF %A% LEQ 5 (
-    REM Bandit encounter.
-    set currentEnemy=iBandit
-    CALL "%cd%\data\Combat Engine\scripts\evie.bat"
-    GOTO :MAIN
-) ELSE IF %A% LEQ 6 (
-    REM Jester encounter.
-    SET currentEnemy=iJester
-    CALL "%cd%\data\Combat Engine\scripts\evie.bat"
-    GOTO :MAIN
-) ELSE IF %A% LEQ 7 (
-    REM Gnome encounter.
-    SET currentEnemy=iGnome
-    CALL "%cd%\data\Combat Engine\scripts\evie.bat"
-    GOTO :MAIN
-) ELSE IF %A% GEQ 8 (
-    REM Hunter encounter.
-    SET currentEnemy=iHunter
-    CALL "%cd%\data\Combat Engine\scripts\evie.bat"
-    GOTO :MAIN
-) ELSE IF %A% LEQ 9 (
-    REM Goblin encounter.
-    SET currentEnemy=iGoblin
-    CALL "%cd%\data\Combat Engine\scripts\evie.bat"
-    GOTO :MAIN
-) ELSE IF %A% GEQ 10 (
-    REM Found 100 coins.
-    SET /A COINS=!COINS! +100
-    SET displayMessage=Found 100 coins!
-    GOTO :MAIN
-) ELSE IF %A% GEQ 11 (
-    REM Found nothing.
-    SET displayMessage=You didn't find anything.
-    GOTO :MAIN
-) ELSE IF %A% GEQ 35 (
-    REM Gabriel Aberdeen encounter.
+) ELSE IF %N% GEQ 50 (
     IF %gabrial_aberdeen_added_party% == true (
         SET displayMessage=You didn't find anything.
         GOTO :MAIN
@@ -94,17 +76,7 @@ IF %A% GTR 45 (
         CALL "%cd%\data\Exploration Engine\scripts\npcadd.bat"
         GOTO :MAIN
     )
-    GOTO :MAIN
-) ELSE IF %A% EQU 13 (
-    REM Found nothing.
-    SET displayMessage=You didn't find anything.
-    GOTO :MAIN
-) ELSE IF %A% EQU 14 (
-    REM Found nothing.
-    SET displayMessage=You didn't find anything.
-    GOTO :MAIN
-) ELSE IF %A% EQU 15 (
-    REM Gary Morcant encounter.
+) ELSE IF %N% LEQ 50 (
     IF %gary_morcant_added_party% == true (
         SET displayMessage=You didn't find anything.
         GOTO :MAIN
@@ -113,10 +85,6 @@ IF %A% GTR 45 (
         CALL "%cd%\data\Exploration Engine\scripts\npcadd.bat"
         GOTO :MAIN
     )
-) ELSE (
-    REM Found nothing.
-    SET displayMessage=You didn't find anything.
-    GOTO :MAIN
 )
 
 REM Checks if the Player has unlocked this location.
