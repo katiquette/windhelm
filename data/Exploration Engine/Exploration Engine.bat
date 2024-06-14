@@ -31,7 +31,7 @@ REM Attempts to encounter an enemy or NPC. Low level enemies can be found here.
 :EXPLORE_IRIDESCENT_FOREST
 SET bl=Iridescent Forest
 SET /A A=%RANDOM% %%50
-IF %A% GTR 30 (
+IF %A% GTR 45 (
     REM Clarke Blackwell encounter.
     IF %clarke_blackwell_added_party% == true (
         SET displayMessage=You didn't find anything.
@@ -65,26 +65,26 @@ IF %A% GTR 30 (
     SET currentEnemy=iGnome
     CALL "%cd%\data\Combat Engine\scripts\evie.bat"
     GOTO :MAIN
-) ELSE IF %A% EQU 8 (
+) ELSE IF %A% GEQ 8 (
     REM Hunter encounter.
     SET currentEnemy=iHunter
     CALL "%cd%\data\Combat Engine\scripts\evie.bat"
     GOTO :MAIN
-) ELSE IF %A% EQU 9 (
+) ELSE IF %A% LEQ 9 (
     REM Goblin encounter.
     SET currentEnemy=iGoblin
     CALL "%cd%\data\Combat Engine\scripts\evie.bat"
     GOTO :MAIN
-) ELSE IF %A% EQU 10 (
+) ELSE IF %A% GEQ 10 (
     REM Found 100 coins.
     SET /A COINS=!COINS! +100
     SET displayMessage=Found 100 coins!
     GOTO :MAIN
-) ELSE IF %A% EQU 11 (
+) ELSE IF %A% GEQ 11 (
     REM Found nothing.
     SET displayMessage=You didn't find anything.
     GOTO :MAIN
-) ELSE IF %A% GTR 25 (
+) ELSE IF %A% GEQ 35 (
     REM Gabriel Aberdeen encounter.
     IF %gabrial_aberdeen_added_party% == true (
         SET displayMessage=You didn't find anything.
