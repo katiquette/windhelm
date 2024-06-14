@@ -1,15 +1,19 @@
 @ECHO OFF
-TITLE (WINDHELM) EVIe - Intializing Combat Engine variables.
-REM Enemy Variable Intializer Enhanced. Version 1.0.4 (240224) - For Windhelm Build 2 "Bottle o' Features"
+TITLE (WINDHELM) - EVIe
+
+REM Every enemy excluding iBandit are disabled for testing.
+
+REM Resets the queue every time Combat Engine is called.
+SET q_action_1=EMPTY
+SET q_action_2=EMPTY
+SET q_action_3=EMPTY
+SET player_levelup_notif=.
 
 :CEV
 REM Below is a list of Variables, each list pertains to a specific enemy.
 REM Global Variables
-SET armorCalculated=0
-SET plrStun=False
+SET player_armor_calculated=0
 SET enLooted=0
-SET heavyAttack=0
-SET heavyAttackCommit=0
 
 REM BANDIT VARIABLES
 SET iBanditHP=80
@@ -17,102 +21,123 @@ SET iBanditAT_b=14
 SET iBanditAT=14
 SET iBanditWK=False
 SET iBanditSTM=100
+SET iBanditSTMC=5
 
 REM JESTER VARIABLES
-SET iJesterHP=125
-SET iJesterAT_b=22
-SET iJesterAT=22
-SET iJesterWK=False
-SET iJesterSTM=100
+REM SET iJesterHP=125
+REM SET iJesterAT_b=22
+REM SET iJesterAT=22
+REM SET iJesterWK=False
+REM SET iJesterSTM=100
+REM SET iJesterSTMC=20
 
 REM GNOME VARIABLES
-SET iGnomeHP=75
-SET iGnomeAT_b=28
-SET iGnomeAT=28
-SET iGnomeWK=True
-SET iGnomeSTM=100
+REM SET iGnomeHP=75
+REM SET iGnomeAT_b=28
+REM SET iGnomeAT=28
+REM SET iGnomeWK=True
+REM SET iGnomeSTM=100
+REM SET iGnomeSTMC=20
 
 REM JESTER COOLDOWNS
 REM Jester "Joke" attack, dealing multiplied damage.
-SET iJesterJK=6
+REM SET iJesterJK=6
 
 REM HUNTER VARIABLES
-SET iHunterHP=115
-SET iHunterAT_b=20
-SET iHunterAT=20
-SET iHunterWK=False
-SET iHunterSTM=100
+REM SET iHunterHP=115
+REM SET iHunterAT_b=20
+REM SET iHunterAT=20
+REM SET iHunterWK=False
+REM SET iHunterSTM=100
+REM SET iHunterSTMC=20
 
 REM GOBLIN VARIABLES
-SET iGoblinHP=60
-SET iGoblinAT_b=16
-SET iGoblinAT=16
-SET iGoblinWK=False
-SET iGoblinSTM=100
+REM SET iGoblinHP=60
+REM SET iGoblinAT_b=16
+REM SET iGoblinAT=16
+REM SET iGoblinWK=False
+REM SET iGoblinSTM=100
+REM SET iGoblinSTMC=20
 
 REM GNOME COOLDOWNS
 REM Gnome "Poke" Attack, dealing multiplied damage.
-SET iGnomePA=4
+REM SET iGnomePA=4
 REM Default Action points for debugging
-SET pAP=10
+REM SET pAP=10
 
 REM GOLEM VARIABLES
-SET iGolemHP=90
-SET iGolemAT_b=20
-SET iGolemAT=20
-SET iGolemSTM=50
-SET iGolemMGK=0
-SET iGolemWK=False
+REM SET iGolemHP=90
+REM SET iGolemAT_b=20
+REM SET iGolemAT=20
+REM SET iGolemSTM=50
+REM SET iGolemSTMC=10
+REM SET iGolemMGK=0
+REM SET iGolemWK=False
+
+REM Testing
+SET curEn=%currentEnemy%
+SET enemy_health=%iBanditHP%
+SET enemy_attack=%iBanditAT%
+SET enemy_attack_normal=%iBanditAT_b%
+SET enemy_stamina=%iBanditSTM%
+SET enemy_stamina_cost=%iBanditSTMC%
+GOTO :combat_engine
 
 REM Assigns the dynamic enemy variable with the values of specific enemies.
 SET curEn=%currentEnemy%
 SET en_effect_1=None
 IF %curEn% == iBandit (
-    SET enHP=%iBanditHP%
-    SET enAT=%iBanditAT%
-    SET enATb=%iBanditAT_b%
-    SET enWK=%iBanditWK%
-    SET enSTM=%iBanditSTM%
+    SET enemy_health=%iBanditHP%
+    SET enemy_attack=%iBanditAT%
+    SET enemy_attackb=%iBanditAT_b%
+    SET enemy_weaken_res=%iBanditWK%
+    SET enemy_stamina=%iBanditSTM%
+    SET enemy_stamina_cost=%iBanditSTMC%
     SET curEn=Bandit
     GOTO :combat_engine
 ) ELSE IF %curEn% == iJester (
-    SET enHP=%iJesterHP%
-    SET enAT=%iJesterAT%
-    SET enATb=%iJesterAT_b%
-    SET enWK=%iJesterWK%
-    SET enSTM=%iJesterSTM%
+    SET enemy_health=%iJesterHP%
+    SET enemy_attack=%iJesterAT%
+    SET enemy_attackb=%iJesterAT_b%
+    SET enemy_weaken_res=%iJesterWK%
+    SET enemy_stamina=%iJesterSTM%
+    SET enemy_stamina_cost=%iJesterSTMC%
     SET curEn=Jester
     GOTO :combat_engine
 ) ELSE IF %curEn% == iGnome (
-    SET enHP=%iGnomeHP%
-    SET enAT=%iGnomeAT%
-    SET enATb=%iGnomeAT_b%
-    SET enWK=%iGnomeWK%
-    SET enSTM=%iGnomeSTM%
+    SET enemy_health=%iGnomeHP%
+    SET enemy_attack=%iGnomeAT%
+    SET enemy_attackb=%iGnomeAT_b%
+    SET enemy_weaken_res=%iGnomeWK%
+    SET enemy_stamina=%iGnomeSTM%
+    enemy_stamina_cost=%iGnomeSTMC%
     SET curEn=Gnome
     GOTO :combat_engine
 ) ELSE IF %curEn% == iHunter (
-    SET enHP=%iHunterHP%
-    SET enAT=%iHunterAT%
-    SET enATb=%iHunterAT_b%
-    SET enWK=%iHunterWK%
-    SET enSTM=%iHunterSTM%
+    SET enemy_health=%iHunterHP%
+    SET enemy_attack=%iHunterAT%
+    SET enemy_attackb=%iHunterAT_b%
+    SET enemy_weaken_res=%iHunterWK%
+    SET enemy_stamina=%iHunterSTM%
+    SET enemy_stamina_cost=%iHunterSTMC%
     SET curEn=Hunter
     GOTO :combat_engine
 ) ELSE IF %curEn% == iGoblin (
-    SET enHP=%iGoblinHP%
-    SET enAT=%iGoblinAT%
-    SET enATb=%iGoblinAT_b%
-    SET enWK=%iGoblinWK%
-    SET enSTM=%iGoblinSTM%
+    SET enemy_health=%iGoblinHP%
+    SET enemy_attack=%iGoblinAT%
+    SET enemy_attackb=%iGoblinAT_b%
+    SET enemy_weaken_res=%iGoblinWK%
+    SET enemy_stamina=%iGoblinSTM%
+    SET enemy_stamina_cost=%iGoblinSTMC%
     SET curEn=Goblin
     GOTO :combat_engine
 ) ELSE IF %curEn% == iGolem (
-    SET enHP=%iGolemHP%
-    SET enAT=%iGolemAT%
-    SET enATb=%iGolemAT_b%
-    SET enWK=%iGolemWK%
-    SET enSTM=%iGolemSTM%
+    SET enemy_health=%iGolemHP%
+    SET enemy_attack=%iGolemAT%
+    SET enemy_attackb=%iGolemAT_b%
+    SET enemy_weaken_res=%iGolemWK%
+    SET enemy_stamina=%iGolemSTM%
+    SET enemy_stamina_cost=%iGolemSTMC%
     SET enMGK=%iGolemMGK%
     GOTO :combat_engine
 ) ELSE (
