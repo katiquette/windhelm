@@ -1,13 +1,9 @@
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 @ECHO OFF
 MODE con: cols=120 lines=29
-REM Combat Engine Beta Version 1.0.0.
-REM Extra Build Information: NIGHTLY-ce1-240613-B2.BE1.GU0
+REM Combat Engine Beta Version 8.0.0.
+REM Extra Build Information: ce1-240613-B1.BE8.GU0
 REM This software is licensed under GPL-3.0-or-later.
-
-REM old vars
-REM ...
-REM old vars
 
 REM "Enemy Battle Screen". Player and Enemy information is displayed here.
 :EBS
@@ -15,7 +11,7 @@ TITLE (WINDHELM) - COMBAT ENGINE ^| %player_name% the %player_class% vs %curEn% 
 CLS
 REM Check enemy/player health to determine victory or defeat.
 IF %enemy_health% LEQ 0 GOTO :VICTORY_REWARDS
-IF %player_health% LEQ 0 GOTO :defeat
+IF %player_health% LEQ 0 GOTO :DEFEAT_SCREEN
 REM Write the data from the text file to the CLI.
 ECHO.
 TYPE "%cd%\data\assets\enemies\Iridescent Forest\%curEn%.txt"
@@ -180,20 +176,20 @@ SET /A EATK=%RANDOM% %%20
 IF %EATK% LSS 7 (
     REM Player attack misses.
     SET displayMessage=enemy missed. idiots.
-    GOTO :EBS
+    GOTO :PLAYER_END_TURN
 ) ELSE IF %EATK% GTR 16 (
     REM Random critical hit.
     SET /A player_health=!player_health! -%enemy_attack%
     SET displayMessage=The enemy got a critical hit. Just kidding.
-    GOTO :EBS
+    GOTO :PLAYER_END_TURN
 ) ELSE (
     REM Normal attack.
     SET /A player_health=!player_health! -%enemy_attack%
     SET displayMessage=You were hit.
-    GOTO :EBS
+    GOTO :PLAYER_END_TURN
 )
 
-REM Opens the Player's inventory. CECALL tells Inventory Viewer which script called it, and where to return when the Player exits.
+REM This should probably get reworked. I mean, obviously. The inventory is getting a big ol upgrade.
 :PLAYER_INVENTORY
 SET CE7CALL=1
 CALL "%cd%\data\functions\Inventory Viewer.bat"
@@ -204,7 +200,78 @@ REM Handles those pesky errors.
 CALL "%cd%\data\functions\Error Handler.bat"
 EXIT
 
-REM Performs some cleanup
+REM Handles victory conditions. This should eventually scale with difficulty.
+:VICTORY_REWARDS
+CALL "%cd%\data\functions\leveler.bat"
+SET player_health=%player_health_max%
+SET player_stamina=%player_stamina_max%
+SET player_magicka=%player_magicka_max%
+SET /A RR=%RANDOM% %%20
+IF %RR% GEQ 15 (
+    SET goldGained=60
+    SET xpGained=25
+    GOTO :VICTORY_SCREEN
+) ELSE IF %RR% LEQ 8 (
+    SET goldGained=20
+    SET xpGained=10
+    GOTO :VICTORY_SCREEN
+) ELSE (
+    SET goldGained=10
+    SET xpGained=5
+    GOTO :VICTORY_SCREEN
+)
+
+:VICTORY_SCREEN
+SET /A player_coins=!player_coins! +%goldGained%
+SET /A player_xp=!player_xp! +%xpGained%
+TITLE (WINDHELM) - COMBAT ENGINE ^| %player_name% the %player_class% is victorious!
+CLS
+ECHO.
+TYPE "%cd%\data\assets\ui\victory.txt"
+ECHO.
+ECHO +----------------------------------------------------------------------------------------------------------------------+
+ECHO ^| %lootFound% ^| %player_levelup_notif%
+ECHO ^| You defeated the %curEn%, congratulations! You've been rewarded with %goldGained% Gold and %xpGained% xp.
+ECHO +----------------------------------------------------------------------------------------------------------------------+
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka%
+ECHO +----------------------------------------------------------------------------------------------------------------------+
+ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka% ^| LVL: %follower_level%
+ECHO ^| ACTION 1: %q_action_1% ^| ACTION 2: %q_action_2% ^| ACTION 3: %q_action_3%
+ECHO +----------------------------------------------------------------------------------------------------------------------+
+ECHO ^| [1 / LOOT %curEn% ] ^| [E / EXIT ]  ^| %player_message%                                                       +
+ECHO +----------------------------------------------------------------------------------------------------------------------+
+CHOICE /C 1E /N /M ">"
+IF ERRORLEVEL 2 GOTO :EXIT
+IF ERRORLEVEL 1 GOTO :LOOT
+
+:LOOT
+CALL "%cd%\data\Combat Engine\scripts\ceLoot.bat"
+SET enLooted=1
+GOTO :VICTORY_SCREEN
+
+:DEFEAT_SCREEN
+SET /A player_xp=!player_xp! +10
+SET player_health=%player_health_max%
+TITLE (WINDHELM) - COMBAT ENGINE ^| %player_name% the %player_class% is victorious!
+CLS
+ECHO.
+TYPE "%cd%\data\assets\ui\defeat.txt"
+ECHO.
+ECHO +---------------------------------------------------------------------------------------------------------------------+
+ECHO ^| %lootFound%
+ECHO ^| You were defeated ny the %curEn%! You've been rewarded with 10 xp.
+ECHO +---------------------------------------------------------------------------------------------------------------------+
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka%
+ECHO +---------------------------------------------------------------------------------------------------------------------+
+ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka% ^| LVL: %follower_level%
+ECHO ^| ACTION 1: %q_action_1% ^| ACTION 2: %q_action_2% ^| ACTION 3: %q_action_3%
+ECHO +---------------------------------------------------------------------------------------------------------------------+
+ECHO ^| [E / EXIT ]  ^| %player_message%                                                                            +
+ECHO +---------------------------------------------------------------------------------------------------------------------+
+CHOICE /C E /N /M ">"
+IF ERRORLEVEL 1 GOTO :EXIT
+
+REM Performs some cleanup and then exits.
 :EXIT
 SET player_armor_calculated=1
 SET enemy_attack=%enemy_attack_normal%
