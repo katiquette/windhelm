@@ -109,6 +109,7 @@ ECHO %player_reputation%
 ECHO %player_ruins_unlocked%
 ECHO %player_last_location%
 ECHO %follower_name%
+ECHO %follower_level%
 ECHO %follower_health%
 ECHO %follower_damage_skill%
 ECHO %follower_stamina_skill%
@@ -236,6 +237,7 @@ SET /P player_reputation=
 SET /P player_ruins_unlocked=
 SET /P player_last_location=
 SET /P follower_name=
+SET /P follower_level=
 SET /P follower_health=
 SET /P follower_damage_skill=
 SET /P follower_stamina_skill=
@@ -367,6 +369,7 @@ REM Player positions
 SET player_last_location=WP
 REM Set default Party information.
 SET follower_name=VACANT
+SET follower_level=0
 SET follower_health=0
 REM Party member skill XP, currently only supports damage, stamina and magicka.
 SET follower_damage_skill=0
