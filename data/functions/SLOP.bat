@@ -33,39 +33,6 @@ SET GA_DMG=13
 SET GA_STM=145
 SET GA_MGK=50
 
-REM Default inventory grid.
-SET player.inventory_slot_1=EMPTY
-SET player.inventory_slot_2=EMPTY
-SET player.inventory_slot_3=EMPTY
-SET player.inventory_slot_4=EMPTY
-SET player.inventory_slot_5=EMPTY
-SET player.inventory_slot_6=EMPTY
-SET player.inventory_slot_7=EMPTY
-SET player.inventory_slot_8=EMPTY
-SET player.inventory_slot_9=EMPTY
-SET player.inventory_slot_10=EMPTY
-SET player.inventory_slot_11=EMPTY
-SET player.inventory_slot_12=EMPTY
-SET player.inventory_slot_13=EMPTY
-SET player.inventory_slot_14=EMPTY
-SET player.inventory_slot_15=EMPTY
-REM Default inventory item stack size.
-SET player.inventory_slot_1_stack=0
-SET player.inventory_slot_2_stack=0
-SET player.inventory_slot_3_stack=0
-SET player.inventory_slot_4_stack=0
-SET player.inventory_slot_5_stack=0
-SET player.inventory_slot_6_stack=0
-SET player.inventory_slot_7_stack=0
-SET player.inventory_slot_8_stack=0
-SET player.inventory_slot_9_stack=0
-SET player.inventory_slot_10_stack=0
-SET player.inventory_slot_11_stack=0
-SET player.inventory_slot_12_stack=0
-SET player.inventory_slot_13_stack=0
-SET player.inventory_slot_14_stack=0
-SET player.inventory_slot_15_stack=0
-
 REM Check SLoPr for the desired action.
 :callCheck
 IF %SLOPr% == SAVE (
@@ -122,38 +89,84 @@ ECHO %follower_occupation%
 ECHO %gary_morcant_added_party%
 ECHO %gabrial_aberdeen_added_party%
 ECHO %clarke_blackwell_added_party%
-ECHO %player_longSword_owned%
-ECHO %player_shortSword_owned%
-ECHO %player_greatAxe_owned%
-ECHO %player_mace_owned%
-ECHO %player_woodenBow_owned%
-ECHO %player_cactusA_owned%
-ECHO %player_stoneA_owned%
-ECHO %player_steelA_owned%
-ECHO %player_scaledA_owned%
-ECHO %player_guardA_owned%
-ECHO %player_ironA_owned%
-ECHO %player_leatherA_owned%
-ECHO %player_silverA_owned%
-ECHO %player_goldA_owned%
-ECHO %player_bRobes_owned%
-ECHO %player_iRobes_owned%
-ECHO %player_aRobes_owned%
-ECHO %player_bronze_buckler_owned%
-ECHO %player_kite_shield_owned%
-ECHO %player_healingT_owned%
-ECHO %player_staminaT_owned%
-ECHO %player_magickaT_owned%
-ECHO %player_stunT_owned%
+ECHO %player_armor_equipped%
 ECHO %player_weapon_equipped%
 ECHO %player_shield_equipped%
-ECHO %player_armor_equipped%
-ECHO %player_travelerJournal_owned%
-ECHO %player_merchantGuide_owned%
-ECHO %player_guide_to_blades_owned%
-ECHO %player_travelerJournal_read%
-ECHO %player_merchantGuide_read%
-ECHO %player_guide_to_blades_read%
+ECHO %player.inventory_slot_1%
+ECHO %player.inventory_slot_2%
+ECHO %player.inventory_slot_3%
+ECHO %player.inventory_slot_4%
+ECHO %player.inventory_slot_5%
+ECHO %player.inventory_slot_6%
+ECHO %player.inventory_slot_7%
+ECHO %player.inventory_slot_8%
+ECHO %player.inventory_slot_9%
+ECHO %player.inventory_slot_10%
+ECHO %player.inventory_slot_11%
+ECHO %player.inventory_slot_12%
+ECHO %player.inventory_slot_13%
+ECHO %player.inventory_slot_14%
+ECHO %player.inventory_slot_15%
+ECHO %player.inventory_slot_1_stack%
+ECHO %player.inventory_slot_2_stack%
+ECHO %player.inventory_slot_3_stack%
+ECHO %player.inventory_slot_4_stack%
+ECHO %player.inventory_slot_5_stack%
+ECHO %player.inventory_slot_6_stack%
+ECHO %player.inventory_slot_7_stack%
+ECHO %player.inventory_slot_8_stack%
+ECHO %player.inventory_slot_9_stack%
+ECHO %player.inventory_slot_10_stack%
+ECHO %player.inventory_slot_11_stack%
+ECHO %player.inventory_slot_12_stack%
+ECHO %player.inventory_slot_13_stack%
+ECHO %player.inventory_slot_14_stack%
+ECHO %player.inventory_slot_15_stack%
+ECHO %player.inventory_slot_1_type%
+ECHO %player.inventory_slot_2_type%
+ECHO %player.inventory_slot_3_type%
+ECHO %player.inventory_slot_4_type%
+ECHO %player.inventory_slot_5_type%
+ECHO %player.inventory_slot_6_type%
+ECHO %player.inventory_slot_7_type%
+ECHO %player.inventory_slot_8_type%
+ECHO %player.inventory_slot_9_type%
+ECHO %player.inventory_slot_10_type%
+ECHO %player.inventory_slot_11_type%
+ECHO %player.inventory_slot_12_type%
+ECHO %player.inventory_slot_13_type%
+ECHO %player.inventory_slot_14_type%
+ECHO %player.inventory_slot_15_type%
+ECHO %player.inventory_slot_1_attribute%
+ECHO %player.inventory_slot_2_attribute%
+ECHO %player.inventory_slot_3_attribute%
+ECHO %player.inventory_slot_4_attribute%
+ECHO %player.inventory_slot_5_attribute%
+ECHO %player.inventory_slot_6_attribute%
+ECHO %player.inventory_slot_7_attribute%
+ECHO %player.inventory_slot_8_attribute%
+ECHO %player.inventory_slot_9_attribute%
+ECHO %player.inventory_slot_10_attribute%
+ECHO %player.inventory_slot_11_attribute%
+ECHO %player.inventory_slot_12_attribute%
+ECHO %player.inventory_slot_13_attribute%
+ECHO %player.inventory_slot_14_attribute%
+ECHO %player.inventory_slot_15_attribute%
+ECHO %player.inventory_slot_1_avail_enchant%
+ECHO %player.inventory_slot_2_avail_enchant%
+ECHO %player.inventory_slot_3_avail_enchant%
+ECHO %player.inventory_slot_4_avail_enchant%
+ECHO %player.inventory_slot_5_avail_enchant%
+ECHO %player.inventory_slot_6_avail_enchant%
+ECHO %player.inventory_slot_7_avail_enchant%
+ECHO %player.inventory_slot_8_avail_enchant%
+ECHO %player.inventory_slot_9_avail_enchant%
+ECHO %player.inventory_slot_10_avail_enchant%
+ECHO %player.inventory_slot_11_avail_enchant%
+ECHO %player.inventory_slot_12_avail_enchant%
+ECHO %player.inventory_slot_13_avail_enchant%
+ECHO %player.inventory_slot_14_avail_enchant%
+ECHO %player.inventory_slot_15_avail_enchant%
 ECHO %blacksmith_longSword_price%
 ECHO %blacksmith_shortSword_price%
 ECHO %blacksmith_greatAxe_price%
@@ -250,38 +263,84 @@ SET /P follower_occupation=
 SET /P gary_morcant_added_party=
 SET /P gabrial_aberdeen_added_party=
 SET /P clarke_blackwell_added_party=
-SET /P player_longSword_owned=
-SET /P player_shortSword_owned=
-SET /P player_greatAxe_owned=
-SET /P player_mace_owned=
-SET /P player_woodenBow_owned=
-SET /P player_cactusA_owned=
-SET /P player_stoneA_owned=
-SET /P player_steelA_owned=
-SET /P player_scaledA_owned=
-SET /P player_guardA_owned=
-SET /P player_ironA_owned=
-SET /P player_leatherA_owned=
-SET /P player_silverA_owned=
-SET /P player_goldA_owned=
-SET /P player_bRobes_owned=
-SET /P player_iRobes_owned=
-SET /P player_aRobes_owned=
-SET /P player_bronze_buckler_owned=
-SET /P player_kite_shield_owned=
-SET /P player_healingT_owned=
-SET /P player_staminaT_owned=
-SET /P player_magickaT_owned=
-SET /P player_stunT_owned=
+SET /P player_armor_equipped=
 SET /P player_weapon_equipped=
 SET /P player_shield_equipped=
-SET /P player_armor_equipped=
-SET /P player_travelerJournal_owned=
-SET /P player_merchantGuide_owned=
-SET /P player_guide_to_blades_owned=
-SET /P player_travelerJournal_read=
-SET /P player_merchantGuide_read=
-SET /P player_guide_to_blades_read=
+SET /P player.inventory_slot_1=
+SET /P player.inventory_slot_2=
+SET /P player.inventory_slot_3=
+SET /P player.inventory_slot_4=
+SET /P player.inventory_slot_5=
+SET /P player.inventory_slot_6=
+SET /P player.inventory_slot_7=
+SET /P player.inventory_slot_8=
+SET /P player.inventory_slot_9=
+SET /P player.inventory_slot_10=
+SET /P player.inventory_slot_11=
+SET /P player.inventory_slot_12=
+SET /P player.inventory_slot_13=
+SET /P player.inventory_slot_14=
+SET /P player.inventory_slot_15=
+SET /P player.inventory_slot_1_stack=
+SET /P player.inventory_slot_2_stack=
+SET /P player.inventory_slot_3_stack=
+SET /P player.inventory_slot_4_stack=
+SET /P player.inventory_slot_5_stack=
+SET /P player.inventory_slot_6_stack=
+SET /P player.inventory_slot_7_stack=
+SET /P player.inventory_slot_8_stack=
+SET /P player.inventory_slot_9_stack=
+SET /P player.inventory_slot_10_stack=
+SET /P player.inventory_slot_11_stack=
+SET /P player.inventory_slot_12_stack=
+SET /P player.inventory_slot_13_stack=
+SET /P player.inventory_slot_14_stack=
+SET /P player.inventory_slot_15_stack=
+SET /P player.inventory_slot_1_type=
+SET /P player.inventory_slot_2_type=
+SET /P player.inventory_slot_3_type=
+SET /P player.inventory_slot_4_type=
+SET /P player.inventory_slot_5_type=
+SET /P player.inventory_slot_6_type=
+SET /P player.inventory_slot_7_type=
+SET /P player.inventory_slot_8_type=
+SET /P player.inventory_slot_9_type=
+SET /P player.inventory_slot_10_type=
+SET /P player.inventory_slot_11_type=
+SET /P player.inventory_slot_12_type=
+SET /P player.inventory_slot_13_type=
+SET /P player.inventory_slot_14_type=
+SET /P player.inventory_slot_15_type=
+SET /P player.inventory_slot_1_attribute=
+SET /P player.inventory_slot_2_attribute=
+SET /P player.inventory_slot_3_attribute=
+SET /P player.inventory_slot_4_attribute=
+SET /P player.inventory_slot_5_attribute=
+SET /P player.inventory_slot_6_attribute=
+SET /P player.inventory_slot_7_attribute=
+SET /P player.inventory_slot_8_attribute=
+SET /P player.inventory_slot_9_attribute=
+SET /P player.inventory_slot_10_attribute=
+SET /P player.inventory_slot_11_attribute=
+SET /P player.inventory_slot_12_attribute=
+SET /P player.inventory_slot_13_attribute=
+SET /P player.inventory_slot_14_attribute=
+SET /P player.inventory_slot_15_attribute=
+SET /P player.inventory_slot_1_avail_enchant=
+SET /P player.inventory_slot_2_avail_enchant=
+SET /P player.inventory_slot_3_avail_enchant=
+SET /P player.inventory_slot_4_avail_enchant=
+SET /P player.inventory_slot_5_avail_enchant=
+SET /P player.inventory_slot_6_avail_enchant=
+SET /P player.inventory_slot_7_avail_enchant=
+SET /P player.inventory_slot_8_avail_enchant=
+SET /P player.inventory_slot_9_avail_enchant=
+SET /P player.inventory_slot_10_avail_enchant=
+SET /P player.inventory_slot_11_avail_enchant=
+SET /P player.inventory_slot_12_avail_enchant=
+SET /P player.inventory_slot_13_avail_enchant=
+SET /P player.inventory_slot_14_avail_enchant=
+SET /P player.inventory_slot_15_avail_enchant=
 SET /P blacksmith_longSword_price=
 SET /P blacksmith_shortSword_price=
 SET /P blacksmith_greatAxe_price=
@@ -389,45 +448,89 @@ GOTO :PLAYER_INIT_INVENTORY
 
 REM Creates empty inventory slots
 :PLAYER_INIT_INVENTORY
-REM Create weapons owned values.
-SET player_longSword_owned=0
-SET player_shortSword_owned=0
-SET player_greatAxe_owned=0
-SET player_mace_owned=0
-SET player_woodenBow_owned=0
-REM Create armor owned values.
-SET player_cactusA_owned=0
-SET player_stoneA_owned=0
-SET player_steelA_owned=0
-SET player_scaledA_owned=0
-SET player_guardA_owned=0
-SET player_ironA_owned=0
-SET player_leatherA_owned=0
-SET player_silverA_owned=0
-SET player_goldA_owned=0
-SET player_bRobes_owned=0
-SET player_iRobes_owned=0
-SET player_aRobes_owned=0
-REM Create shields owned values.
-SET player_bronze_buckler_owned=0
-SET player_kite_shield_owned=0
-REM Create Tonics owned values.
-SET player_healingT_owned=0
-SET player_staminaT_owned=0
-SET player_magickaT_owned=0
-SET player_stunT_owned=0
-REM Equip slots
+SET player_armor_equipped=EMPTY
 SET player_weapon_equipped=EMPTY
 SET player_shield_equipped=EMPTY
-SET player_armor_equipped=EMPTY
-REM GENERAL INVENTORY ITEMS, SUCH AS BOOKS & SCROLLS.
-SET player_travelerJournal_owned=0
-SET player_merchantGuide_owned=0
-SET player_guide_to_blades_owned=0
-REM Has the skill scroll/book been read?
-SET player_travelerJournal_read=0
-SET player_merchantGuide_read=0
-SET player_guide_to_blades_read=0
+REM Default inventory grid.
+SET player.inventory_slot_1=Longsword
+SET player.inventory_slot_2=EMPTY
+SET player.inventory_slot_3=EMPTY
+SET player.inventory_slot_4=EMPTY
+SET player.inventory_slot_5=EMPTY
+SET player.inventory_slot_6=EMPTY
+SET player.inventory_slot_7=EMPTY
+SET player.inventory_slot_8=EMPTY
+SET player.inventory_slot_9=EMPTY
+SET player.inventory_slot_10=EMPTY
+SET player.inventory_slot_11=EMPTY
+SET player.inventory_slot_12=EMPTY
+SET player.inventory_slot_13=EMPTY
+SET player.inventory_slot_14=EMPTY
+SET player.inventory_slot_15=EMPTY
+REM Default inventory item stack size.
+SET player.inventory_slot_1_stack=2
+SET player.inventory_slot_2_stack=0
+SET player.inventory_slot_3_stack=0
+SET player.inventory_slot_4_stack=0
+SET player.inventory_slot_5_stack=0
+SET player.inventory_slot_6_stack=0
+SET player.inventory_slot_7_stack=0
+SET player.inventory_slot_8_stack=0
+SET player.inventory_slot_9_stack=0
+SET player.inventory_slot_10_stack=0
+SET player.inventory_slot_11_stack=0
+SET player.inventory_slot_12_stack=0
+SET player.inventory_slot_13_stack=0
+SET player.inventory_slot_14_stack=0
+SET player.inventory_slot_15_stack=0
+REM Default inventory item type.
+SET player.inventory_slot_1_type=weapon
+SET player.inventory_slot_2_type=NONE
+SET player.inventory_slot_3_type=NONE
+SET player.inventory_slot_4_type=NONE
+SET player.inventory_slot_5_type=NONE
+SET player.inventory_slot_6_type=NONE
+SET player.inventory_slot_7_type=NONE
+SET player.inventory_slot_8_type=NONE
+SET player.inventory_slot_9_type=NONE
+SET player.inventory_slot_10_type=NONE
+SET player.inventory_slot_11_type=NONE
+SET player.inventory_slot_12_type=NONE
+SET player.inventory_slot_13_type=NONE
+SET player.inventory_slot_14_type=NONE
+SET player.inventory_slot_15_type=NONE
+REM Default inventory item attributes. Attributes are modifiers applied to weapons, like enchantments. Only one attribute can be applied per available item.
+SET player.inventory_slot_1_attribute=NONE
+SET player.inventory_slot_2_attribute=NONE
+SET player.inventory_slot_3_attribute=NONE
+SET player.inventory_slot_4_attribute=NONE
+SET player.inventory_slot_5_attribute=NONE
+SET player.inventory_slot_6_attribute=NONE
+SET player.inventory_slot_7_attribute=NONE
+SET player.inventory_slot_8_attribute=NONE
+SET player.inventory_slot_9_attribute=NONE
+SET player.inventory_slot_10_attribute=NONE
+SET player.inventory_slot_11_attribute=NONE
+SET player.inventory_slot_12_attribute=NONE
+SET player.inventory_slot_13_attribute=NONE
+SET player.inventory_slot_14_attribute=NONE
+SET player.inventory_slot_15_attribute=NONE
+REM Default inventory item enchantment availability.
+SET player.inventory_slot_1_avail_enchant=true
+SET player.inventory_slot_2_avail_enchant=false
+SET player.inventory_slot_3_avail_enchant=false
+SET player.inventory_slot_4_avail_enchant=false
+SET player.inventory_slot_5_avail_enchant=false
+SET player.inventory_slot_6_avail_enchant=false
+SET player.inventory_slot_7_avail_enchant=false
+SET player.inventory_slot_8_avail_enchant=false
+SET player.inventory_slot_9_avail_enchant=false
+SET player.inventory_slot_10_avail_enchant=false
+SET player.inventory_slot_11_avail_enchant=false
+SET player.inventory_slot_12_avail_enchant=false
+SET player.inventory_slot_13_avail_enchant=false
+SET player.inventory_slot_14_avail_enchant=false
+SET player.inventory_slot_15_avail_enchant=false
 GOTO :INIT_MERCHANTS
 
 REM Setup Merchant inventories & Prices
