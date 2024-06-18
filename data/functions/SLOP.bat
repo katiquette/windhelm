@@ -122,6 +122,21 @@ ECHO %player.inventory_slot_12_stack%
 ECHO %player.inventory_slot_13_stack%
 ECHO %player.inventory_slot_14_stack%
 ECHO %player.inventory_slot_15_stack%
+ECHO %player.inventory_slot_1_stack_max%
+ECHO %player.inventory_slot_2_stack_max%
+ECHO %player.inventory_slot_3_stack_max%
+ECHO %player.inventory_slot_4_stack_max%
+ECHO %player.inventory_slot_5_stack_max%
+ECHO %player.inventory_slot_6_stack_max%
+ECHO %player.inventory_slot_7_stack_max%
+ECHO %player.inventory_slot_8_stack_max%
+ECHO %player.inventory_slot_9_stack_max%
+ECHO %player.inventory_slot_10_stack_max%
+ECHO %player.inventory_slot_11_stack_max%
+ECHO %player.inventory_slot_12_stack_max%
+ECHO %player.inventory_slot_13_stack_max%
+ECHO %player.inventory_slot_14_stack_max%
+ECHO %player.inventory_slot_15_stack_max%
 ECHO %player.inventory_slot_1_type%
 ECHO %player.inventory_slot_2_type%
 ECHO %player.inventory_slot_3_type%
@@ -296,6 +311,21 @@ SET /P player.inventory_slot_12_stack=
 SET /P player.inventory_slot_13_stack=
 SET /P player.inventory_slot_14_stack=
 SET /P player.inventory_slot_15_stack=
+SET /P player.inventory_slot_1_stack_max=
+SET /P player.inventory_slot_2_stack_max=
+SET /P player.inventory_slot_3_stack_max=
+SET /P player.inventory_slot_4_stack_max=
+SET /P player.inventory_slot_5_stack_max=
+SET /P player.inventory_slot_6_stack_max=
+SET /P player.inventory_slot_7_stack_max=
+SET /P player.inventory_slot_8_stack_max=
+SET /P player.inventory_slot_9_stack_max=
+SET /P player.inventory_slot_10_stack_max=
+SET /P player.inventory_slot_11_stack_max=
+SET /P player.inventory_slot_12_stack_max=
+SET /P player.inventory_slot_13_stack_max=
+SET /P player.inventory_slot_14_stack_max=
+SET /P player.inventory_slot_15_stack_max=
 SET /P player.inventory_slot_1_type=
 SET /P player.inventory_slot_2_type=
 SET /P player.inventory_slot_3_type=
@@ -452,7 +482,7 @@ SET player_armor_equipped=EMPTY
 SET player_weapon_equipped=EMPTY
 SET player_shield_equipped=EMPTY
 REM Default inventory grid.
-SET player.inventory_slot_1=Longsword
+SET player.inventory_slot_1=EMPTY
 SET player.inventory_slot_2=EMPTY
 SET player.inventory_slot_3=EMPTY
 SET player.inventory_slot_4=EMPTY
@@ -468,7 +498,7 @@ SET player.inventory_slot_13=EMPTY
 SET player.inventory_slot_14=EMPTY
 SET player.inventory_slot_15=EMPTY
 REM Default inventory item stack size.
-SET player.inventory_slot_1_stack=2
+SET player.inventory_slot_1_stack=0
 SET player.inventory_slot_2_stack=0
 SET player.inventory_slot_3_stack=0
 SET player.inventory_slot_4_stack=0
@@ -483,8 +513,24 @@ SET player.inventory_slot_12_stack=0
 SET player.inventory_slot_13_stack=0
 SET player.inventory_slot_14_stack=0
 SET player.inventory_slot_15_stack=0
+REM Max stack size.
+SET player.inventory_slot_1_stack_max=999
+SET player.inventory_slot_2_stack_max=999
+SET player.inventory_slot_3_stack_max=999
+SET player.inventory_slot_4_stack_max=999
+SET player.inventory_slot_5_stack_max=999
+SET player.inventory_slot_6_stack_max=999
+SET player.inventory_slot_7_stack_max=999
+SET player.inventory_slot_8_stack_max=999
+SET player.inventory_slot_9_stack_max=999
+SET player.inventory_slot_10_stack_max=999
+SET player.inventory_slot_11_stack_max=999
+SET player.inventory_slot_12_stack_max=999
+SET player.inventory_slot_13_stack_max=999
+SET player.inventory_slot_14_stack_max=999
+SET player.inventory_slot_15_stack_max=999
 REM Default inventory item type.
-SET player.inventory_slot_1_type=weapon
+SET player.inventory_slot_1_type=NONE
 SET player.inventory_slot_2_type=NONE
 SET player.inventory_slot_3_type=NONE
 SET player.inventory_slot_4_type=NONE
@@ -516,7 +562,7 @@ SET player.inventory_slot_13_attribute=NONE
 SET player.inventory_slot_14_attribute=NONE
 SET player.inventory_slot_15_attribute=NONE
 REM Default inventory item enchantment availability.
-SET player.inventory_slot_1_avail_enchant=true
+SET player.inventory_slot_1_avail_enchant=false
 SET player.inventory_slot_2_avail_enchant=false
 SET player.inventory_slot_3_avail_enchant=false
 SET player.inventory_slot_4_avail_enchant=false
