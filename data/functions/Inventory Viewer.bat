@@ -157,6 +157,7 @@ ECHO + Item Stack: %player.inventory_slot_1_stack%
 ECHO + Item Stack Max: %player.inventory_slot_1_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_1_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_1_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_1_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -173,6 +174,7 @@ ECHO + Item Stack: %player.inventory_slot_2_stack%
 ECHO + Item Stack Max: %player.inventory_slot_2_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_2_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_2_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_2_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -189,6 +191,7 @@ ECHO + Item Stack: %player.inventory_slot_3_stack%
 ECHO + Item Stack Max: %player.inventory_slot_3_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_3_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_3_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_3_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -205,6 +208,7 @@ ECHO + Item Stack: %player.inventory_slot_4_stack%
 ECHO + Item Stack Max: %player.inventory_slot_4_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_4_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_4_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_4_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -221,6 +225,7 @@ ECHO + Item Stack: %player.inventory_slot_5_stack%
 ECHO + Item Stack Max: %player.inventory_slot_5_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_5_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_5_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_5_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -237,6 +242,7 @@ ECHO + Item Stack: %player.inventory_slot_6_stack%
 ECHO + Item Stack Max: %player.inventory_slot_6_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_6_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_6_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_6_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -253,6 +259,7 @@ ECHO + Item Stack: %player.inventory_slot_7_stack%
 ECHO + Item Stack Max: %player.inventory_slot_7_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_7_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_7_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_7_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -269,6 +276,7 @@ ECHO + Item Stack: %player.inventory_slot_8_stack%
 ECHO + Item Stack Max: %player.inventory_slot_8_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_8_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_8_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_8_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -285,6 +293,7 @@ ECHO + Item Stack: %player.inventory_slot_9_stack%
 ECHO + Item Stack Max: %player.inventory_slot_9_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_9_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_9_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_9_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -301,6 +310,7 @@ ECHO + Item Stack: %player.inventory_slot_10_stack%
 ECHO + Item Stack Max: %player.inventory_slot_10_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_10_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_10_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_10_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -317,6 +327,7 @@ ECHO + Item Stack: %player.inventory_slot_11_stack%
 ECHO + Item Stack Max: %player.inventory_slot_11_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_11_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_11_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_11_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -333,6 +344,7 @@ ECHO + Item Stack: %player.inventory_slot_12_stack%
 ECHO + Item Stack Max: %player.inventory_slot_12_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_12_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_12_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_12_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -349,6 +361,7 @@ ECHO + Item Stack: %player.inventory_slot_13_stack%
 ECHO + Item Stack Max: %player.inventory_slot_13_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_13_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_13_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_13_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -365,6 +378,7 @@ ECHO + Item Stack: %player.inventory_slot_14_stack%
 ECHO + Item Stack Max: %player.inventory_slot_14_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_14_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_14_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_14_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -381,6 +395,7 @@ ECHO + Item Stack: %player.inventory_slot_15_stack%
 ECHO + Item Stack Max: %player.inventory_slot_15_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_15_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_15_avail_enchant%
+ECHO + Item Damage: %player.inventory_slot_15_damage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -401,7 +416,7 @@ IF "%player.inventory_slot_1_type%" == "weapon" (
         SET /A player.inventory_slot_1_stack=!player.inventory_slot_1_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_1%
         SET item.weapon.return_to_slot=player.inventory_slot_1
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_1_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -441,7 +456,7 @@ IF "%player.inventory_slot_2_type%" == "weapon" (
         SET /A player.inventory_slot_2_stack=!player.inventory_slot_2_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_2%
         SET item.weapon.return_to_slot=player.inventory_slot_2
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_2_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -481,7 +496,7 @@ IF "%player.inventory_slot_3_type%" == "weapon" (
         SET /A player.inventory_slot_3_stack=!player.inventory_slot_3_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_3%
         SET item.weapon.return_to_slot=player.inventory_slot_3
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_3_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -521,7 +536,7 @@ IF "%player.inventory_slot_4_type%" == "weapon" (
         SET /A player.inventory_slot_4_stack=!player.inventory_slot_4_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_4%
         SET item.weapon.return_to_slot=player.inventory_slot_4
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_4_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -561,7 +576,7 @@ IF "%player.inventory_slot_5_type%" == "weapon" (
         SET /A player.inventory_slot_5_stack=!player.inventory_slot_5_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_5%
         SET item.weapon.return_to_slot=player.inventory_slot_5
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_5_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -601,7 +616,7 @@ IF "%player.inventory_slot_6_type%" == "weapon" (
         SET /A player.inventory_slot_6_stack=!player.inventory_slot_6_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_6%
         SET item.weapon.return_to_slot=player.inventory_slot_6
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_6_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -641,7 +656,7 @@ IF "%player.inventory_slot_7_type%" == "weapon" (
         SET /A player.inventory_slot_7_stack=!player.inventory_slot_7_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_7%
         SET item.weapon.return_to_slot=player.inventory_slot_7
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_7_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -681,7 +696,7 @@ IF "%player.inventory_slot_8_type%" == "weapon" (
         SET /A player.inventory_slot_8_stack=!player.inventory_slot_8_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_8%
         SET item.weapon.return_to_slot=player.inventory_slot_8
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_8_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -721,7 +736,7 @@ IF "%player.inventory_slot_9_type%" == "weapon" (
         SET /A player.inventory_slot_9_stack=!player.inventory_slot_9_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_9%
         SET item.weapon.return_to_slot=player.inventory_slot_9
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_9_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -761,7 +776,7 @@ IF "%player.inventory_slot_10_type%" == "weapon" (
         SET /A player.inventory_slot_10_stack=!player.inventory_slot_10_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_10%
         SET item.weapon.return_to_slot=player.inventory_slot_10
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_10_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -801,7 +816,7 @@ IF "%player.inventory_slot_11_type%" == "weapon" (
         SET /A player.inventory_slot_11_stack=!player.inventory_slot_11_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_11%
         SET item.weapon.return_to_slot=player.inventory_slot_11
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_11_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -841,7 +856,7 @@ IF "%player.inventory_slot_12_type%" == "weapon" (
         SET /A player.inventory_slot_12_stack=!player.inventory_slot_12_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_12%
         SET item.weapon.return_to_slot=player.inventory_slot_12
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_12_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -881,7 +896,7 @@ IF "%player.inventory_slot_13_type%" == "weapon" (
         SET /A player.inventory_slot_13_stack=!player.inventory_slot_13_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_13%
         SET item.weapon.return_to_slot=player.inventory_slot_13
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_13_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -921,7 +936,7 @@ IF "%player.inventory_slot_14_type%" == "weapon" (
         SET /A player.inventory_slot_14_stack=!player.inventory_slot_14_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_14%
         SET item.weapon.return_to_slot=player.inventory_slot_14
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_14_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -961,7 +976,7 @@ IF "%player.inventory_slot_15_type%" == "weapon" (
         SET /A player.inventory_slot_15_stack=!player.inventory_slot_15_stack! -1
         SET player_weapon_equipped=%player.inventory_slot_15%
         SET item.weapon.return_to_slot=player.inventory_slot_15
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_DAMAGE
     )
 ) ELSE IF "%player.inventory_slot_15_type%" == "armor" (
     REM Now check if the player has armor equipped already.
@@ -984,5 +999,62 @@ IF "%player.inventory_slot_15_type%" == "weapon" (
 ) ELSE (
     REM Unknown type.
     SET displayMessage=Cannot parse item type.
+    GOTO :EQUIP_ITEM
+)
+
+REM Checks for the weapon in the slot and then applies it to the Player's damage.
+:CHECK_DAMAGE
+IF "%player_weapon_equipped%" == "Shortsword" (
+    SET player_damage=%shortsword_d%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_weapon_equipped%" == "Longsword" (
+    SET player_damage=%longsword_d%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_weapon_equipped%" == "Greataxe" (
+    SET player_damage=%greataxe_d%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_weapon_equipped%" == "Mace" (
+    SET player_damage=%mace_d%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_weapon_equipped%" == "woodenBow" (
+    SET player_damage=%weapon.woodenBow_damage%
+    GOTO :EQUIP_ITEM
+) ELSE (
+    REM Unknown weapon / generic error
+    ECHO Error equipping weapon, unknown weapon.
+    PAUSE
+    GOTO :EQUIP_ITEM
+)
+
+REM Checks for the armor in the slot and then applies it to the Player's armor rating.
+:CHECK_ARMOR
+IF "%player_armor_equipped%" == "Cactus Armor" (
+    SET player_armor=%cactusA_p%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_armor_equipped%" == "Stone Armor" (
+    SET player_armor=%stoneA_p%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_armor_equipped%" == "Steel Armor" (
+    SET player_armor=%steelA_p%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_armor_equipped%" == "Scaled Armor" (
+    SET player_armor=%scaledA_p%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_armor_equipped%" == "Iron Armor" (
+    SET player_armor=%ironArmor_prot%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_armor_equipped%" == "Leather Armor" (
+    SET player_armor=%leatherArmor_prot%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_armor_equipped%" == "Silver Armor" (
+    SET player_armor=%silverArmor_prot%
+    GOTO :EQUIP_ITEM
+) ELSE IF "%player_armor_equipped%" == "Gold Armor" (
+    SET player_armor=%goldArmor_prot%
+    GOTO :EQUIP_ITEM
+) ELSE (
+    REM Unknown armor / generic error
+    ECHO Error equipping armor, unknown armor.
+    PAUSE
     GOTO :EQUIP_ITEM
 )
