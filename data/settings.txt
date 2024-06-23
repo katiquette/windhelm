@@ -1,2 +1,2 @@
 0E
-1
+ECHO is off.

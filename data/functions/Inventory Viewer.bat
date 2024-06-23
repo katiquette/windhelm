@@ -11,7 +11,7 @@ TYPE "%cd%\data\assets\ui\inventory.txt"
 ECHO.
 ECHO %displayMessage%
 ECHO +--------------------------------------------------------------------------------------------------+
-ECHO ^| COINS: %player_coins% ^| XP: %player_xp% ^| HP: %player_health% ^| ARMOR: %player_armor_equipped% ^| SHIELD: %player_shield_equipped% ^| WEAPON: %player_weapon_equipped%
+ECHO ^| COINS: %player_coins% ^| XP: %player_xp% ^| HP: %player_health% ^| ARMOR: %player_armor_equipped% ^| SHIELD: %player_shield_equipped% ^| WEAPON: %player_weapon_equipped% ^| SPELL: %player.spell_equipped%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| PARTY 1: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka%
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -21,13 +21,15 @@ ECHO 3 ^| %player.inventory_slot_3% / %player.inventory_slot_3_stack% ^| 8 ^| %p
 ECHO 4 ^| %player.inventory_slot_4% / %player.inventory_slot_4_stack% ^| 9 ^| %player.inventory_slot_9% / %player.inventory_slot_9_stack% ^| 14 ^| %player.inventory_slot_14% / %player.inventory_slot_14_stack%
 ECHO 5 ^| %player.inventory_slot_5% / %player.inventory_slot_5_stack% ^| 10 ^| %player.inventory_slot_10% / %player.inventory_slot_10_stack% ^| 15 ^| %player.inventory_slot_15% / %player.inventory_slot_15_stack%
 ECHO +--------------------------------------------------------------------------------------------------+
-ECHO ^| [1 / EQUIP ITEM ] ^| [2 / USE ITEM ] ^| [3 / INSPECT ITEM ] ^| [4 / DISCARD ITEM ] ^| [E / EXIT ]
+ECHO ^| [1 / EQUIP ITEM ] ^| [2 / VIEW SPELLS ] ^| [3 / USE ITEM ] ^| [4 / INSPECT ITEM ] ^| [5 / UNEQUIP ITEM ] ^| [6 / DISCARD ITEM ]^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
-CHOICE /C 1234E /N /M ">"
-IF ERRORLEVEL 5 GOTO :EOF
-IF ERRORLEVEL 4 GOTO :DISCARD_ITEM
-IF ERRORLEVEL 3 GOTO :INSPECT_ITEM
-IF ERRORLEVEL 2 GOTO :USE_ITEM
+CHOICE /C 123456E /N /M ">"
+IF ERRORLEVEL 7 GOTO :EOF
+IF ERRORLEVEL 6 GOTO :DISCARD_ITEM
+IF ERRORLEVEL 5 GOTO :UNEQUIP_ITEM
+IF ERRORLEVEL 4 GOTO :INSPECT_ITEM
+IF ERRORLEVEL 3 GOTO :USE_ITEM
+IF ERRORLEVEL 2 GOTO :VIEW_SPELLS
 IF ERRORLEVEL 1 GOTO :EQUIP_ITEM
 
 REM Attemps to equip an item from a specificed slot.
@@ -158,6 +160,7 @@ ECHO + Item Stack Max: %player.inventory_slot_1_stack_max%
 ECHO + Item Attribute: %player.inventory_slot_1_attribute%
 ECHO + Item Enchanted?: %player.inventory_slot_1_avail_enchant%
 ECHO + Item Damage: %player.inventory_slot_1_damage%
+ECHO + Item Armor: %player.inventory_slot_1_armor%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [E / EXIT ]
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -430,7 +433,7 @@ IF "%player.inventory_slot_1_type%" == "weapon" (
         SET /A player.inventory_slot_1_stack=!player.inventory_slot_1_stack! -1
         SET player_armor_equipped=%player.inventory_slot_1%
         SET item.armor.return_to_slot=player.inventory_slot_1
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_1_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -470,7 +473,7 @@ IF "%player.inventory_slot_2_type%" == "weapon" (
         SET /A player.inventory_slot_2_stack=!player.inventory_slot_2_stack! -1
         SET player_armor_equipped=%player.inventory_slot_2%
         SET item.armor.return_to_slot=player.inventory_slot_2
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_2_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -510,7 +513,7 @@ IF "%player.inventory_slot_3_type%" == "weapon" (
         SET /A player.inventory_slot_3_stack=!player.inventory_slot_3_stack! -1
         SET player_armor_equipped=%player.inventory_slot_3%
         SET item.armor.return_to_slot=player.inventory_slot_3
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_3_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -550,7 +553,7 @@ IF "%player.inventory_slot_4_type%" == "weapon" (
         SET /A player.inventory_slot_4_stack=!player.inventory_slot_4_stack! -1
         SET player_armor_equipped=%player.inventory_slot_4%
         SET item.armor.return_to_slot=player.inventory_slot_4
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_4_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -590,7 +593,7 @@ IF "%player.inventory_slot_5_type%" == "weapon" (
         SET /A player.inventory_slot_5_stack=!player.inventory_slot_5_stack! -1
         SET player_armor_equipped=%player.inventory_slot_5%
         SET item.armor.return_to_slot=player.inventory_slot_5
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_5_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -630,7 +633,7 @@ IF "%player.inventory_slot_6_type%" == "weapon" (
         SET /A player.inventory_slot_6_stack=!player.inventory_slot_6_stack! -1
         SET player_armor_equipped=%player.inventory_slot_6%
         SET item.armor.return_to_slot=player.inventory_slot_6
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_6_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -670,7 +673,7 @@ IF "%player.inventory_slot_7_type%" == "weapon" (
         SET /A player.inventory_slot_7_stack=!player.inventory_slot_7_stack! -1
         SET player_armor_equipped=%player.inventory_slot_7%
         SET item.armor.return_to_slot=player.inventory_slot_7
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_7_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -710,7 +713,7 @@ IF "%player.inventory_slot_8_type%" == "weapon" (
         SET /A player.inventory_slot_8_stack=!player.inventory_slot_8_stack! -1
         SET player_armor_equipped=%player.inventory_slot_8%
         SET item.armor.return_to_slot=player.inventory_slot_8
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_8_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -750,7 +753,7 @@ IF "%player.inventory_slot_9_type%" == "weapon" (
         SET /A player.inventory_slot_9_stack=!player.inventory_slot_9_stack! -1
         SET player_armor_equipped=%player.inventory_slot_9%
         SET item.armor.return_to_slot=player.inventory_slot_9
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_9_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -790,7 +793,7 @@ IF "%player.inventory_slot_10_type%" == "weapon" (
         SET /A player.inventory_slot_10_stack=!player.inventory_slot_10_stack! -1
         SET player_armor_equipped=%player.inventory_slot_10%
         SET item.armor.return_to_slot=player.inventory_slot_10
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_10_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -830,7 +833,7 @@ IF "%player.inventory_slot_11_type%" == "weapon" (
         SET /A player.inventory_slot_11_stack=!player.inventory_slot_11_stack! -1
         SET player_armor_equipped=%player.inventory_slot_11%
         SET item.armor.return_to_slot=player.inventory_slot_11
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_11_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -870,7 +873,7 @@ IF "%player.inventory_slot_12_type%" == "weapon" (
         SET /A player.inventory_slot_12_stack=!player.inventory_slot_12_stack! -1
         SET player_armor_equipped=%player.inventory_slot_12%
         SET item.armor.return_to_slot=player.inventory_slot_12
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_12_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -910,7 +913,7 @@ IF "%player.inventory_slot_13_type%" == "weapon" (
         SET /A player.inventory_slot_13_stack=!player.inventory_slot_13_stack! -1
         SET player_armor_equipped=%player.inventory_slot_13%
         SET item.armor.return_to_slot=player.inventory_slot_13
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_13_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -950,7 +953,7 @@ IF "%player.inventory_slot_14_type%" == "weapon" (
         SET /A player.inventory_slot_14_stack=!player.inventory_slot_14_stack! -1
         SET player_armor_equipped=%player.inventory_slot_14%
         SET item.armor.return_to_slot=player.inventory_slot_14
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_14_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -990,7 +993,7 @@ IF "%player.inventory_slot_15_type%" == "weapon" (
         SET /A player.inventory_slot_15_stack=!player.inventory_slot_15_stack! -1
         SET player_armor_equipped=%player.inventory_slot_15%
         SET item.armor.return_to_slot=player.inventory_slot_15
-        GOTO :EQUIP_ITEM
+        GOTO :CHECK_ARMOR
     )
 ) ELSE IF "%player.inventory_slot_15_type%" == "NONE" (
     REM Cannot equip this item type, or unknown type.
@@ -1058,3 +1061,113 @@ IF "%player_armor_equipped%" == "Cactus Armor" (
     PAUSE
     GOTO :EQUIP_ITEM
 )
+
+REM View owned and equipped spells.
+:VIEW_SPELLS
+CLS
+ECHO.
+TYPE "%cd%\data\assets\ui\inventory.txt"
+ECHO.
+ECHO %displayMessage%
+ECHO Select a spell to equip.
+ECHO %displayMessage%
+ECHO.
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO ^| COINS: %player_coins% ^| XP: %player_xp% ^| HP: %player_health% ^| ARMOR: %player_armor_equipped% ^| SHIELD: %player_shield_equipped% ^| WEAPON: %player_weapon_equipped% ^| SPELL: %player.spell_equipped%
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO ^| PARTY 1: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka%
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO + 1 | %player.spell_slot_1% / %player.spell_slot_1_type%
+ECHO + 1 | %player.spell_slot_2% / %player.spell_slot_2_type%
+ECHO + 1 | %player.spell_slot_3% / %player.spell_slot_3_type%
+ECHO + 1 | %player.spell_slot_4% / %player.spell_slot_4_type%
+ECHO + 1 | %player.spell_slot_5% / %player.spell_slot_5_type%
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO ^| [1 / SLOT 1 ] ^| [2 / SLOT 2 ] ^| [3 / SLOT 3 ] ^| [4 / SLOT 4 ] ^| [5 / SLOT 5 ] ^| [E / EXIT ]
+ECHO +--------------------------------------------------------------------------------------------------+
+CHOICE /C 12345E /N /M ">"
+IF ERRORLEVEL 6 GOTO :MM
+IF ERRORLEVEL 5 GOTO :ATTEMPT_EQUIP_SPELL_5
+IF ERRORLEVEL 4 GOTO :ATTEMPT_EQUIP_SPELL_4
+IF ERRORLEVEL 3 GOTO :ATTEMPT_EQUIP_SPELL_3
+IF ERRORLEVEL 2 GOTO :ATTEMPT_EQUIP_SPELL_2
+IF ERRORLEVEL 1 GOTO :ATTEMPT_EQUIP_SPELL_1
+
+REM Allows the Player to unequip items.
+:UNEQUIP_ITEM
+CLS
+ECHO.
+TYPE "%cd%\data\assets\ui\inventory.txt"
+ECHO.
+ECHO %displayMessage%
+ECHO Select an item to equip.
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO 1 ^| %player.inventory_slot_1% / %player.inventory_slot_1_stack% ^| 6 ^| %player.inventory_slot_6% / %player.inventory_slot_6_stack% ^| 11 ^| %player.inventory_slot_11% / %player.inventory_slot_11_stack%
+ECHO 2 ^| %player.inventory_slot_2% / %player.inventory_slot_2_stack% ^| 7 ^| %player.inventory_slot_7% / %player.inventory_slot_7_stack% ^| 12 ^| %player.inventory_slot_12% / %player.inventory_slot_12_stack%
+ECHO 3 ^| %player.inventory_slot_3% / %player.inventory_slot_3_stack% ^| 8 ^| %player.inventory_slot_8% / %player.inventory_slot_8_stack% ^| 13 ^| %player.inventory_slot_13% / %player.inventory_slot_13_stack%
+ECHO 4 ^| %player.inventory_slot_4% / %player.inventory_slot_4_stack% ^| 9 ^| %player.inventory_slot_9% / %player.inventory_slot_9_stack% ^| 14 ^| %player.inventory_slot_14% / %player.inventory_slot_14_stack%
+ECHO 5 ^| %player.inventory_slot_5% / %player.inventory_slot_5_stack% ^| 10 ^| %player.inventory_slot_10% / %player.inventory_slot_10_stack% ^| 15 ^| %player.inventory_slot_15% / %player.inventory_slot_15_stack%
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO ^| [1 / SLOT 1 ] ^| [2 / SLOT 2 ] ^| [3 / SLOT 3 ] ^| [4 / SLOT 4 ] ^| [5 / SLOT 5 ]
+ECHO ^| [6 / SLOT 6 ] ^| [7 / SLOT 7 ] ^| [8 / SLOT 8 ] ^| [9 / SLOT 9 ] ^| [N / NEXT PAGE ] ^| [E / EXIT ]
+ECHO +--------------------------------------------------------------------------------------------------+
+CHOICE /C 123456789NE /N /M ">"
+IF ERRORLEVEL 11 GOTO :MM
+IF ERRORLEVEL 10 GOTO :UNEQUIP_ITEM_PAGE_2
+IF ERRORLEVEL 9 GOTO :ATTEMPT_UNEQUIP_9
+IF ERRORLEVEL 8 GOTO :ATTEMPT_UNEQUIP_8
+IF ERRORLEVEL 7 GOTO :ATTEMPT_UNEQUIP_7
+IF ERRORLEVEL 6 GOTO :ATTEMPT_UNEQUIP_6
+IF ERRORLEVEL 5 GOTO :ATTEMPT_UNEQUIP_5
+IF ERRORLEVEL 4 GOTO :ATTEMPT_UNEQUIP_4
+IF ERRORLEVEL 3 GOTO :ATTEMPT_UNEQUIP_3
+IF ERRORLEVEL 2 GOTO :ATTEMPT_UNEQUIP_2
+IF ERRORLEVEL 1 GOTO :ATTEMPT_UNEQUIP_1
+
+REM Attemps to unqeuip the item in slot 1.
+:ATTEMPT_UNEQUIP_1
+IF NOT "%player_weapon_equipped%" == "EMPTY" (
+    REM Weapon not equipped in this slot.
+    IF NOT "%player_armor_equipped%" == "EMPTY" (
+        REM No equippable item in this slot!
+        SET displayMessage=There is no item in this slot equipped.
+        GOTO :UNEQUIP_ITEM
+    ) ELSE (
+        SET /A player.inventory_slot_1_stack=!player.inventory_slot_1_stack! +1
+        SET player_armor_equipped=EMPTY
+        SET displayMessage=%player.inventory_slot_1% unequipped.
+        GOTO :UNEQUIP_ITEM
+    )
+) ELSE (
+    SET /A player.inventory_slot_1_stack=!player.inventory_slot_1_stack! +1
+    SET player_weapon_equipped=NONE
+    SET displayMessage=%player.inventory_slot_1% unequipped.
+    GOTO :UNEQUIP_ITEM
+)
+
+:UNEQUIP_ITEM_PAGE_2
+CLS
+ECHO.
+TYPE "%cd%\data\assets\ui\inventory.txt"
+ECHO.
+ECHO %displayMessage%
+ECHO Select an item to equip.
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO 1 ^| %player.inventory_slot_1% / %player.inventory_slot_1_stack% ^| 6 ^| %player.inventory_slot_6% / %player.inventory_slot_6_stack% ^| 11 ^| %player.inventory_slot_11% / %player.inventory_slot_11_stack%
+ECHO 2 ^| %player.inventory_slot_2% / %player.inventory_slot_2_stack% ^| 7 ^| %player.inventory_slot_7% / %player.inventory_slot_7_stack% ^| 12 ^| %player.inventory_slot_12% / %player.inventory_slot_12_stack%
+ECHO 3 ^| %player.inventory_slot_3% / %player.inventory_slot_3_stack% ^| 8 ^| %player.inventory_slot_8% / %player.inventory_slot_8_stack% ^| 13 ^| %player.inventory_slot_13% / %player.inventory_slot_13_stack%
+ECHO 4 ^| %player.inventory_slot_4% / %player.inventory_slot_4_stack% ^| 9 ^| %player.inventory_slot_9% / %player.inventory_slot_9_stack% ^| 14 ^| %player.inventory_slot_14% / %player.inventory_slot_14_stack%
+ECHO 5 ^| %player.inventory_slot_5% / %player.inventory_slot_5_stack% ^| 10 ^| %player.inventory_slot_10% / %player.inventory_slot_10_stack% ^| 15 ^| %player.inventory_slot_15% / %player.inventory_slot_15_stack%
+ECHO +--------------------------------------------------------------------------------------------------+
+ECHO ^| [1 / SLOT 10 ] ^| [2 / SLOT 11 ] ^| [3 / SLOT 12 ] ^| [4 / SLOT 13 ] ^| [5 / SLOT 14 ]
+ECHO ^| [6 / SLOT 15 ] ^| [N / LAST PAGE ] ^| [E / EXIT ]
+ECHO +--------------------------------------------------------------------------------------------------+
+CHOICE /C 123456NE /N /M ">"
+IF ERRORLEVEL 7 GOTO :MM
+IF ERRORLEVEL 7 GOTO :EQUIP_ITEM
+IF ERRORLEVEL 6 GOTO :ATTEMPT_UNEQUIP_15
+IF ERRORLEVEL 5 GOTO :ATTEMPT_UNEQUIP_14
+IF ERRORLEVEL 4 GOTO :ATTEMPT_UNEQUIP_13
+IF ERRORLEVEL 3 GOTO :ATTEMPT_UNEQUIP_12
+IF ERRORLEVEL 2 GOTO :ATTEMPT_UNEQUIP_11
+IF ERRORLEVEL 1 GOTO :ATTEMPT_UNEQUIP_10

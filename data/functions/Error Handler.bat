@@ -1,8 +1,5 @@
 @ECHO OFF
-TITLE (WINDHELM) Error Encountered ^| ERROR: %errorType%
-COLOR 4F
-REM Does this even count as an "Error Handler"? I mean, this thing can only be called when there are errors that I myself have predicted...
-REM Like someone tampering with game files (deleting/renaming them) or something similar.
+REM Just handling the errors!
 
 REM Check error type
 IF %errorType% == EnemyType (
@@ -15,6 +12,8 @@ IF %errorType% == EnemyType (
     GOTO :errorType_encounterError
 ) ELSE IF %errorType% == LastLocal (
     GOTO :errorType_lastLocal
+) ELSE IF %errorType% == invalidString (
+    GOTO :errorType_invalidString
 ) ELSE (
     REM ...an error, inside of Error Handler??? Unthinkable!
     SET errorType=unknownError
@@ -24,6 +23,8 @@ IF %errorType% == EnemyType (
 
 REM Display the "Enemy Type" error.
 :errorType_enemy
+ECHO 
+
 CLS
 ECHO.
 ECHO ERROR! Error Type: EnemyType.
@@ -70,4 +71,6 @@ ECHO If this repeats, email nope@donotemailme.fuckoff.com
 PAUSE
 EXIT
 
-REM Submit an issue on GitHub ya goober! ...you bothered to snoop through the code anyway.
+:errorType_invalidString
+ECHO Combat Engine.bat: LINE %errorLineCE%. errorType? %errorType%. Occured on %DATE%,%TIME%. Critical? Yes. >> winLog.txt
+EXIT

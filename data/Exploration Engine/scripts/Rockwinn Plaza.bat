@@ -1,6 +1,9 @@
 @ECHO OFF
 TITLE (Rockwinn Plaza) - Rockwinn Plaza ^| %player_name% the %player_class%
 
+SET refunded=false
+SET refundPrice=0
+
 REM Main Menu.
 :MAIN
 MODE con: cols=127 lines=22
@@ -39,9 +42,9 @@ ECHO %displayMessage%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| COINS: %player_coins% ^| XP: %player_xp% ^| LUNIS: %player_lunis%
 ECHO +--------------------------------------------------------------------------------------------------+
-ECHO ^| HEALING TONIC: %hTonic_s%, PRICE: %hTonic_p%
-ECHO ^| STAMINA TONIC: %sTonic_s%, PRICE: %sTonic_p%
-ECHO ^| MAGICKA TONIC: %mTonic_s%, PRICE: %mTonic_p%
+ECHO ^| HEALING TONIC: %alchemist_healthTonic_stock%, PRICE: %alchemist_healthTonic_price%
+ECHO ^| STAMINA TONIC: %alchemist_staminaTonic_stock%, PRICE: %alchemist_staminaTonic_price%
+ECHO ^| MAGICKA TONIC: %alchemist_magickaTonic_stock%, PRICE: %alchemist_magickaTonic_price%
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO + [1 / HEALING TONIC ] ^| [2 / STAMINA TONIC ] ^| [3 / MAGICKA TONIC ] ^| [E / GO BACK ]              +
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -53,40 +56,85 @@ IF ERRORLEVEL 1 GOTO :ALCHEMIST_BUY_HEL_TONIC
 
 REM Attempt to purchase the healing Tonic.
 :ALCHEMIST_BUY_HEL_TONIC
-IF %coins% LSS %hTonic_p% (
+IF %player_coins% LSS %alchemist_healthTonic_price% (
     SET displayMessage=You can't afford this Tonic.
     GOTO :RWP_ALCHEMIST
 ) ELSE (
-    SET /A COINS=!COINS! -%hTonic_p%
-    SET /A healingT_q=!healingT_q! +1
-    SET /A hTonic_s=!hTonic_s! -1
-    SET displayMessage=Purchased 1 Healing Tonic for %hTonic_p% coins.
+    SET /A player_coins=!player_coins! -%alchemist_healthTonic_price%
+    SET item.to_add=Healing Tonic
+    SET item.to_add_type=consumable
+    SET item.to_add_stack_max=64
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    CALL "%cd%\data\functions\itemadder.bat"
+    IF %refunded% == "true" (
+         SET /A armorer_cactusArmor_stock=!armorer_cactusArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ALCHEMIST
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Cactus Armor for %armorer_cactusArmor_price% coins.
+        GOTO :RWP_ALCHEMIST
+    )
+    SET /A alchemist_healthTonic_stock=!alchemist_healthTonic_stock! -1
+    SET displayMessage=Purchased 1 Healing Tonic for %alchemist_healthTonic_price% coins.
     GOTO :RWP_ALCHEMIST
 )
 
 REM Attempt to purchase the stamina Tonic.
 :ALCHEMIST_BUY_STM_TONIC
-IF %coins% LSS %sTonic_p% (
+IF %player_coins% LSS %sTonic_p% (
     SET displayMessage=You can't afford this Tonic.
     GOTO :RWP_ALCHEMIST
 ) ELSE (
-    SET /A COINS=!COINS! -%sTonic_p%
-    SET /A staminaT_q=!staminaT_q! +1
-    SET /A sTonic_s=!sTonic_s! -1
-    SET displayMessage=Purchased 1 stamina Tonic for %sTonic_p% coins.
+    SET /A player_coins=!player_coins! -%alchemist_staminaTonic_price%
+    SET item.to_add=Stamina Tonic
+    SET item.to_add_type=consumable
+    SET item.to_add_stack_max=64
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    CALL "%cd%\data\functions\itemadder.bat"
+    IF "%refunded%" == "true" (
+         SET /A armorer_cactusArmor_stock=!armorer_cactusArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ALCHEMIST
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Cactus Armor for %armorer_cactusArmor_price% coins.
+        GOTO :RWP_ALCHEMIST
+    )
+    SET /A alchemist_staminaTonic_stock=!alchemist_staminaTonic_stock! -1
+    SET displayMessage=Purchased 1 stamina Tonic for %alchemist_staminaTonic_price% coins.
     GOTO :RWP_ALCHEMIST
 )
 
 REM Attempt to purchase the magicka Tonic.
 :ALCHEMIST_BUY_MGK_TONIC
-IF %coins% LSS %mTonic_p% (
+IF %player_coins% LSS %alchemist_magickaTonic_price% (
     SET displayMessage=You can't afford this Tonic.
     GOTO :RWP_ALCHEMIST
 ) ELSE (
-    SET /A COINS=!COINS! -%mTonic_p%
-    SET /A magickaT_q=!magickaT_q! +1
-    SET /A mTonic_s=!mTonic_s! -1
-    SET displayMessage=Purchased 1 magicka Tonic for %mTonic_p% coins.
+    SET /A player_coins=!player_coins! -%alchemist_magickaTonic_price%
+    SET item.to_add=Magicka Tonic
+    SET item.to_add_type=consumable
+    SET item.to_add_stack_max=64
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    CALL "%cd%\data\functions\itemadder.bat"
+    IF %refunded% == "true" (
+         SET /A armorer_cactusArmor_stock=!armorer_cactusArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ALCHEMIST
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Cactus Armor for %armorer_cactusArmor_price% coins.
+        GOTO :RWP_ALCHEMIST
+    )
+    SET /A alchemist_magickaTonic_stock=!alchemist_magickaTonic_stock! -1
+    SET displayMessage=Purchased 1 magicka Tonic for %alchemist_magickaTonic_price% coins.
     GOTO :RWP_ALCHEMIST
 )
 
@@ -104,9 +152,9 @@ ECHO %displayMessage%
 ECHO +---------------------------------------------------------------------------------------------------------+
 ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka% ^| COINS: %player_coins% ^| XP: %player_xp% ^| LUNIS: %player_lunis%
 ECHO +---------------------------------------------------------------------------------------------------------+
-ECHO ^| CACTUS ARMOR: %cactusArmor_s%, PRICE: %cactusArmor_p% ^| SCALED ARMOR: %scaledArmor_s%, PRICE: %scaledArmor_p% ^| SILVER ARMOR: %silverArmor_s%, PRICE: %silverArmor_p%
-ECHO ^| STONE ARMOR: %stoneArmor_s%, PRICE: %stoneArmor_p%  ^| IRON ARMOR: %ironArmor_s%, PRICE: %ironArmor_p%     ^| GOLD ARMOR: %goldArmor_s%, PRICE: %goldArmor_p%
-ECHO ^| STEEL ARMOR: %steelArmor_s%, PRICE: %steelArmor_p%  ^| LEATHER ARMOR: %leatherArmor_s%, PRICE: %leatherArmor_p% ^|
+ECHO ^| CACTUS ARMOR: %armorer_cactusArmor_stock%, PRICE: %armorer_cactusArmor_price% ^| SCALED ARMOR: %armorer_scaledArmor_stock%, PRICE: %armorer_scaledArmor_price% ^| SILVER ARMOR: %armorer_silverArmor_stock%, PRICE: %armorer_silverArmor_price%
+ECHO ^| STONE ARMOR: %armorer_stoneArmor_stock%, PRICE: %armorer_stoneArmor_price%  ^| IRON ARMOR: %armorer_ironArmor_stock%, PRICE: %armorer_ironArmor_price%     ^| GOLD ARMOR: %armorer_goldArmor_stock%, PRICE: %armorer_goldArmor_price%
+ECHO ^| STEEL ARMOR: %armorer_steelArmor_stock%, PRICE: %armorer_steelArmor_price%  ^| LEATHER ARMOR: %armorer_leatherArmor_stock%, PRICE: %armorer_leatherArmor_price% ^|
 ECHO +---------------------------------------------------------------------------------------------------------+
 ECHO + [1 / CACTUS ARMOR ]  ^| [2 / STONE ARMOR ]  ^| [3 / STEEL ARMOR ] ^| [4 / SCALED ARMOR ] ^| [5 / IRON ARMOR ]
 ECHO +---------------------------------------------------------------------------------------------------------+
@@ -125,106 +173,218 @@ IF ERRORLEVEL 1 GOTO :ARMORER_BUY_CACTUSARMOR
 
 REM Attempt to purchase Cactus Armor.
 :ARMORER_BUY_CACTUSARMOR
-IF %coins% LSS %cactusA_p% (
+IF %player_coins% LSS %armorer_cactusArmor_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_ARMORER
 ) ELSE (
-    SET /A COINS=!COINS! -%cactusA_p%
-    SET /A cactusA_q=!cactusA_q! +1
-    SET /A cactusArmor_s=!cactusArmor_s! -1
-    SET displayMessage=Purchased 1 set of Cactus Armor for %cactusA_p% coins.
-    GOTO :RWP_ARMORER
+    SET /A player_coins=!player_coins! -%armorer_cactusArmor_price%
+    SET item.to_add=Cactus Armor
+    SET item.to_add_type=armor
+    SET item.to_add_stack_max=1
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    SET refundPrice=%armorer_cactusArmor_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A armorer_cactusArmor_stock=!armorer_cactusArmor_stock! -1
+    IF %refunded% == "true" (
+         SET /A armorer_cactusArmor_stock=!armorer_cactusArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Cactus Armor for %armorer_cactusArmor_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase Stone Armor.
 :ARMORER_BUY_STONEARMOR
-IF %coins% LSS %stoneA_p% (
+IF %player_coins% LSS %armorer_stoneArmor_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_ARMORER
 ) ELSE (
-    SET /A COINS=!COINS! -%stoneA_p%
-    SET /A stoneA_q=!stoneA_q! +1
-    SET /A stoneArmor_s=!stoneArmor_s! -1
-    SET displayMessage=Purchased 1 set of Stone Armor for %stoneA_p% coins.
-    GOTO :RWP_ARMORER
+    SET /A player_coins=!player_coins! -%armorer_stoneArmor_price%
+    SET item.to_add=Stone Armor
+    SET item.to_add_type=armor
+    SET item.to_add_stack_max=1
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    SET refundPrice=%armorer_stoneArmor_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A armorer_stoneArmor_stock=!armorer_stoneArmor_stock! -1
+    IF %refunded% == "true" (
+         SET /A armorer_stoneArmor_stock=!armorer_stoneArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Stone Armor for %armorer_stoneArmor_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase Steel Armor.
 :ARMORER_BUY_STEELARMOR
-IF %coins% LSS %steelA_p% (
+IF %player_coins% LSS %armorer_steelArmor_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_ARMORER
 ) ELSE (
-    SET /A COINS=!COINS! -%steelA_p%
-    SET /A steelA_q=!steelA_q! +1
-    SET /A steelArmor_s=!steelArmor_s! -1
-    SET displayMessage=Purchased 1 set of Steel Armor for %steelA_p% coins.
-    GOTO :RWP_ARMORER
+    SET /A player_coins=!player_coins! -%armorer_steelArmor_price%
+    SET item.to_add=Steel Armor
+    SET item.to_add_type=armor
+    SET item.to_add_stack_max=1
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    SET refundPrice=%armorer_steelArmor_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A armorer_steelArmor_stock=!armorer_steelArmor_stock! -1
+    IF %refunded% == "true" (
+         SET /A armorer_steelArmor_stock=!armorer_steelArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Steel Armor for %armorer_steelArmor_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase Scaled Armor.
 :ARMORER_BUY_SCALEDARMOR
-IF %coins% LSS %scaledA_p% (
+IF %player_coins% LSS %armorer_scaledArmor_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_ARMORER
 ) ELSE (
-    SET /A COINS=!COINS! -%scaledA_p%
-    SET /A scaledA_q=!scaledA_q! +1
-    SET /A scaledArmor_s=!scaledArmor_s! -1
-    SET displayMessage=Purchased 1 set of Scaled Armor for %scaledA_p% coins.
-    GOTO :RWP_ARMORER
+    SET /A player_coins=!player_coins! -%armorer_scaledArmor_price%
+    SET item.to_add=Scaled Armor
+    SET item.to_add_type=armor
+    SET item.to_add_stack_max=1
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    SET refundPrice=%armorer_scaledArmor_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A armorer_scaledArmor_stock=!armorer_scaledArmor_stock! -1
+    IF %refunded% == "true" (
+         SET /A armorer_scaledArmor_stock=!armorer_scaledArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Scaled Armor for %armorer_scaledArmor_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase Iron Armor.
 :ARMORER_BUY_IRONARMOR
-IF %coins% LSS %ironArmor_p% (
+IF %player_coins% LSS %armorer_ironArmor_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_ARMORER
 ) ELSE (
-    SET /A COINS=!COINS! -%ironArmor_p%
-    SET /A ironA_q=!ironA_q! +1
-    SET /A ironArmor_s=!ironArmor_s! -1
-    SET displayMessage=Purchased 1 set of Iron Armor for %ironArmor_p% coins.
-    GOTO :RWP_ARMORER
+    SET /A player_coins=!player_coins! -%armorer_ironArmor_price%
+    SET item.to_add=Iron Armor
+    SET item.to_add_type=armor
+    SET item.to_add_stack_max=1
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    SET refundPrice=%armorer_ironArmor_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A armorer_ironArmor_stock=!armorer_ironArmor_stock! -1
+    IF %refunded% == "true" (
+         SET /A armorer_ironArmor_stock=!armorer_ironArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Iron Armor for %armorer_ironArmor_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase Leather Armor.
 :ARMORER_BUY_LEATHERARMOR
-IF %coins% LSS %leatherArmor_p% (
+IF %player_coins% LSS %armorer_leatherArmor_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_ARMORER
 ) ELSE (
-    SET /A COINS=!COINS! -%leatherArmor_p%
-    SET /A leatherA_q=!leatherA_q! +1
-    SET /A leatherArmor_s=!leatherArmor_s! -1
-    SET displayMessage=Purchased 1 set of Leather Armor for %leatherArmor_p% coins.
-    GOTO :RWP_ARMORER
+    SET /A player_coins=!player_coins! -%armorer_leatherArmor_price%
+    SET item.to_add=Leather Armor
+    SET item.to_add_type=armor
+    SET item.to_add_stack_max=1
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    SET refundPrice=%armorer_leatherArmor_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A armorer_leatherArmor_stock=!armorer_leatherArmor_stock! -1
+    IF %refunded% == "true" (
+         SET /A armorer_leatherArmor_stock=!armorer_leatherArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Leather Armor for %armorer_leatherArmor_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase Silver Armor.
 :ARMORER_BUY_SILVERARMOR
-IF %coins% LSS %silverArmor_p% (
+IF %player_coins% LSS %armorer_silverArmor_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_ARMORER
 ) ELSE (
-    SET /A COINS=!COINS! -%silverArmor_p%
-    SET /A silverA_q=!silverA_q! +1
-    SET /A silverArmor_s=!silverArmor_s! -1
-    SET displayMessage=Purchased 1 set of Silver Armor for %silverArmor_p% coins.
-    GOTO :RWP_ARMORER
+    SET /A player_coins=!player_coins! -%armorer_silverArmor_price%
+    SET item.to_add=Silver Armor
+    SET item.to_add_type=armor
+    SET item.to_add_stack_max=1
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    SET refundPrice=%armorer_silverArmor_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A armorer_silverArmor_stock=!armorer_silverArmor_stock! -1
+    IF %refunded% == "true" (
+         SET /A armorer_silverArmor_stock=!armorer_silverArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Silver Armor for %armorer_silverArmor_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase Gold Armor.
 :ARMORER_BUY_GOLDARMOR
-IF %coins% LSS %goldArmor_p% (
+IF %player_coins% LSS %armorer_goldArmor_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_ARMORER
 ) ELSE (
-    SET /A COINS=!COINS! -%goldArmor_p%
-    SET /A goldA_q=!goldA_q! +1
-    SET /A goldArmor_s=!goldArmor_s! -1
-    SET displayMessage=Purchased 1 set of Gold Armor for %goldArmor_p% coins.
-    GOTO :RWP_ARMORER
+    SET /A player_coins=!player_coins! -%armorer_goldArmor_price%
+    SET item.to_add=Gold Armor
+    SET item.to_add_type=armor
+    SET item.to_add_stack_max=1
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=0
+    SET iAdd=purchasedItem
+    SET refundPrice=%armorer_goldArmor_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A armorer_goldArmor_stock=!armorer_goldArmor_stock! -1
+    IF %refunded% == "true" (
+         SET /A armorer_goldArmor_stock=!armorer_goldArmor_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 set of Gold Armor for %armorer_goldArmor_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Blacksmith Vendor.
@@ -257,67 +417,137 @@ IF ERRORLEVEL 1 GOTO :BLACKSMITH_BUY_SHORTSWORD
 
 REM Attempt to purchase the Short Sword.
 :BLACKSMITH_BUY_SHORTSWORD
-IF %coins% LSS %sSword_p% (
+IF %player_coins% LSS %blacksmith_shortSword_price% (
     SET displayMessage=You can't afford this sword.
     GOTO :RWP_BLACKSMITH
 ) ELSE (
-    SET /A COINS=!COINS! -%sSword_p%
-    SET /A shortsword_q=!shortsword_q! +1
-    SET /A sSword_s=!sSword_s! -1
-    SET displayMessage=Purchased 1 Short Sword for %sSword_p% coins.
-    GOTO :RWP_BLACKSMITH
+    SET /A player_coins=!player_coins! -%blacksmith_shortSword_price%
+    SET item.to_add=Shortsword
+    SET item.to_add_type=weapon
+    SET item.to_add_stack_max=6
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=%shortsword_d%
+    SET iAdd=purchasedItem
+    SET refundPrice=%blacksmith_shortSword_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A blacksmith_shortSword_stock=!blacksmith_shortSword_stock! -1
+    IF %refunded% == "true" (
+         SET /A blacksmith_shortSword_stock=!blacksmith_shortSword_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 Shortsword for %blacksmith_shortSword_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase the Long Sword.
 :BLACKSMITH_BUY_LONGSWORD
-IF %coins% LSS %lSword_p% (
+IF %player_coins% LSS %blacksmith_longSword_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_BLACKSMITH
 ) ELSE (
-    SET /A COINS=!COINS! -%lSword_p%
-    SET /A longsword_q=!longsword_q! +1
-    SET /A lSword_s=!lSword_s! -1
-    SET displayMessage=Purchased 1 Long Sword for %lSword_p% coins.
-    GOTO :RWP_BLACKSMITH
+    SET /A player_coins=!player_coins! -%blacksmith_longSword_price%
+    SET item.to_add=Longsword
+    SET item.to_add_type=weapon
+    SET item.to_add_stack_max=6
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=%longsword_d%
+    SET iAdd=purchasedItem
+    SET refundPrice=%blacksmith_longSword_price
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A blacksmith_longSword_stock=!blacksmith_longSword_stock! -1
+    IF %refunded% == "true" (
+         SET /A blacksmith_longSword_stock=!blacksmith_longSword_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 Longsword for %blacksmith_longSword_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase the Greataxe.
 :BLACKSMITH_BUY_GREATAXE
-IF %coins% LSS %gAxe_p% (
+IF %player_coins% LSS %blacksmith_greatAxe_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_BLACKSMITH
 ) ELSE (
-    SET /A COINS=!COINS! -%gAxe_p%
-    SET /A greataxe_q=!greataxe_q! +1
-    SET /A gAxe_s=!gAxe_s! -1
-    SET displayMessage=Purchased 1 Greataxe for %gAxe_p% coins.
-    GOTO :RWP_BLACKSMITH
+    SET /A player_coins=!player_coins! -%blacksmith_greatAxe_price%
+    SET item.to_add=Greataxe
+    SET item.to_add_type=weapon
+    SET item.to_add_stack_max=6
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=%greataxe_d%
+    SET iAdd=purchasedItem
+    SET refundPrice=%blacksmith_greatAxe_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A blacksmith_greatAxe_stock=!blacksmith_greatAxe_stock! -1
+    IF %refunded% == "true" (
+         SET /A blacksmith_greatAxe_stock=!blacksmith_greatAxe_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 Greataxe for %blacksmith_greatAxe_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase the Mace.
 :BLACKSMITH_BUY_MACE
-IF %coins% LSS %mace_p% (
+IF %player_coins% LSS %blacksmith_mace_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_BLACKSMITH
 ) ELSE (
-    SET /A COINS=!COINS! -%mace_p%
-    SET /A mace_q=!mace_q! +1
-    SET /A mace_s=!mace_s! -1
-    SET displayMessage=Purchased 1 Mace for %mace_p% coins.
-    GOTO :RWP_BLACKSMITH
+    SET /A player_coins=!player_coins! -%blacksmith_mace_price%
+    SET item.to_add=Mace
+    SET item.to_add_type=weapon
+    SET item.to_add_stack_max=6
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=%mace_d%
+    SET iAdd=purchasedItem
+    SET refundPrice=%blacksmith_mace_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A blacksmith_mace_stock=!blacksmith_mace_stock! -1
+    IF %refunded% == "true" (
+         SET /A blacksmith_mace_stock=!blacksmith_mace_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 Mace for %blacksmith_mace_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Attempt to purchase the Wooden Bow.
 :BLACKSMITH_BUY_WOODENBOW
-IF %coins% LSS %wBow_p% (
+IF %player_coins% LSS %blacksmith_woodenBow_price% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_BLACKSMITH
 ) ELSE (
-    SET /A COINS=!COINS! -%wBow_p%
-    SET /A woodenb_q=!woodenb_q! +1
-    SET /A wBow_s=!wBow_s! -1
-    SET displayMessage=Purchased 1 Wooden Bow for %wBow_p% coins.
-    GOTO :RWP_BLACKSMITH
+    SET /A player_coins=!player_coins! -%blacksmith_woodenBow_price%
+    SET item.to_add=Wooden Bow
+    SET item.to_add_type=weapon
+    SET item.to_add_stack_max=2
+    SET item.to_add_attribute=NONE
+    SET item.to_add_enchant=FALSE
+    SET item.to_add_damage=%weapon.woodenBow_damage%
+    SET iAdd=purchasedItem
+    SET refundPrice=%blacksmith_woodenBow_price%
+    CALL "%cd%\data\functions\itemadder.bat"
+    SET /A blacksmith_woodenBow_stock=!blacksmith_woodenBow_stock! -1
+    IF %refunded% == "true" (
+         SET /A blacksmith_woodenBow_stock=!blacksmith_woodenBow_stock! +1
+         SET displayMessage=Out of space, item refunded.
+         GOTO :RWP_ARMORER
+    ) ELSE (
+        SET displayMessage=Purchased 1 Wooden Bow for %blacksmith_woodenBow_price% coins.
+        GOTO :RWP_ARMORER
+    )
 )
 
 REM Lorekeeper Vendor.
@@ -346,7 +576,7 @@ IF ERRORLEVEL 1 GOTO :LOREKEEPER_BUY_TRAVELERSGUIDE
 
 REM Attempt to purchase the Traveler's Journal.
 :LOREKEEPER_BUY_TRAVELERSGUIDE
-IF %coins% LSS %tJournal_p% (
+IF %player_coins% LSS %tJournal_p% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_LOREKEEPER
 ) ELSE (
@@ -359,7 +589,7 @@ IF %coins% LSS %tJournal_p% (
 
 REM Attempt to purchase the Merchant's Guide.
 :LOREKEEPER_BUY_MERCHANTSGUIDE
-IF %coins% LSS %mGuide_p% (
+IF %player_coins% LSS %mGuide_p% (
     SET displayMessage=You can't afford this set.
     GOTO :RWP_LOREKEEPER
 ) ELSE (
@@ -399,7 +629,7 @@ IF ERRORLEVEL 1 GOTO :WIZARD_BUY_BASICROBES
 
 REM Attempt to purchase Basic Robes.
 :WIZARD_BUY_BASICROBES
-IF %coins% LSS %bRobes_p% (
+IF %player_coins% LSS %bRobes_p% (
     SET displayMessage=You can't afford these robes.
     GOTO :RWP_WIZARD
 ) ELSE (
@@ -412,7 +642,7 @@ IF %coins% LSS %bRobes_p% (
 
 REM Attempt to purchase Intermediate Robes.
 :WIZARD_BUY_INTERMEDIATEROBES
-IF %coins% LSS %iRobes_p% (
+IF %player_coins% LSS %iRobes_p% (
     SET displayMessage=You can't afford these robes.
     GOTO :RWP_WIZARD
 ) ELSE (
@@ -425,7 +655,7 @@ IF %coins% LSS %iRobes_p% (
 
 REM Attempt to purchase Advanced Robes.
 :WIZARD_BUY_ADVANCEDROBES
-IF %coins% LSS %aRobes_p% (
+IF %player_coins% LSS %aRobes_p% (
     SET displayMessage=You can't afford these robes.
     GOTO :RWP_WIZARD
 ) ELSE (

@@ -17,6 +17,7 @@ SET longsword_d=8
 SET shortsword_d=6
 SET mace_d=12
 SET greataxe_d=17
+SET weapon.woodenBow_damage=15
 SET poison_damage=4
 SET CE7CALL=0
 REM NPC Data
@@ -32,6 +33,11 @@ SET GA_HEL=175
 SET GA_DMG=13
 SET GA_STM=145
 SET GA_MGK=50
+SET iAdd=NONE
+SET refunded=false
+SET refundItem=0
+SET refundPrice=0
+SET itemStored=false
 
 REM Check SLoPr for the desired action.
 :callCheck
@@ -92,6 +98,7 @@ ECHO %clarke_blackwell_added_party%
 ECHO %player_armor_equipped%
 ECHO %player_weapon_equipped%
 ECHO %player_shield_equipped%
+ECHO %player.spell_equipped%
 ECHO %player.inventory_slot_1%
 ECHO %player.inventory_slot_2%
 ECHO %player.inventory_slot_3%
@@ -182,6 +189,76 @@ ECHO %player.inventory_slot_12_avail_enchant%
 ECHO %player.inventory_slot_13_avail_enchant%
 ECHO %player.inventory_slot_14_avail_enchant%
 ECHO %player.inventory_slot_15_avail_enchant%
+ECHO %player.inventory_slot_1_damage%
+ECHO %player.inventory_slot_2_damage%
+ECHO %player.inventory_slot_3_damage%
+ECHO %player.inventory_slot_4_damage%
+ECHO %player.inventory_slot_5_damage%
+ECHO %player.inventory_slot_6_damage%
+ECHO %player.inventory_slot_7_damage%
+ECHO %player.inventory_slot_8_damage%
+ECHO %player.inventory_slot_9_damage%
+ECHO %player.inventory_slot_10_damage%
+ECHO %player.inventory_slot_11_damage%
+ECHO %player.inventory_slot_12_damage%
+ECHO %player.inventory_slot_13_damage%
+ECHO %player.inventory_slot_14_damage%
+ECHO %player.inventory_slot_15_damage%
+ECHO %player.inventory_slot_1_armor%
+ECHO %player.inventory_slot_2_armor%
+ECHO %player.inventory_slot_3_armor%
+ECHO %player.inventory_slot_4_armor%
+ECHO %player.inventory_slot_5_armor%
+ECHO %player.inventory_slot_6_armor%
+ECHO %player.inventory_slot_7_armor%
+ECHO %player.inventory_slot_8_armor%
+ECHO %player.inventory_slot_9_armor%
+ECHO %player.inventory_slot_10_armor%
+ECHO %player.inventory_slot_11_armor%
+ECHO %player.inventory_slot_12_armor%
+ECHO %player.inventory_slot_13_armor%
+ECHO %player.inventory_slot_14_armor%
+ECHO %player.inventory_slot_15_armor%
+ECHO %player.inventory_slot_1_can_equip%
+ECHO %player.inventory_slot_2_can_equip%
+ECHO %player.inventory_slot_3_can_equip%
+ECHO %player.inventory_slot_4_can_equip%
+ECHO %player.inventory_slot_5_can_equip%
+ECHO %player.inventory_slot_6_can_equip%
+ECHO %player.inventory_slot_7_can_equip%
+ECHO %player.inventory_slot_8_can_equip%
+ECHO %player.inventory_slot_9_can_equip%
+ECHO %player.inventory_slot_10_can_equip%
+ECHO %player.inventory_slot_11_can_equip%
+ECHO %player.inventory_slot_12_can_equip%
+ECHO %player.inventory_slot_13_can_equip%
+ECHO %player.inventory_slot_14_can_equip%
+ECHO %player.inventory_slot_15_can_equip%
+ECHO %player.inventory_slot_1_item_equipped%
+ECHO %player.inventory_slot_2_item_equipped%
+ECHO %player.inventory_slot_3_item_equipped%
+ECHO %player.inventory_slot_4_item_equipped%
+ECHO %player.inventory_slot_5_item_equipped%
+ECHO %player.inventory_slot_6_item_equipped%
+ECHO %player.inventory_slot_7_item_equipped%
+ECHO %player.inventory_slot_8_item_equipped%
+ECHO %player.inventory_slot_9_item_equipped%
+ECHO %player.inventory_slot_10_item_equipped%
+ECHO %player.inventory_slot_11_item_equipped%
+ECHO %player.inventory_slot_12_item_equipped%
+ECHO %player.inventory_slot_13_item_equipped%
+ECHO %player.inventory_slot_14_item_equipped%
+ECHO %player.inventory_slot_15_item_equipped%
+ECHO %player.spell_slot_1%
+ECHO %player.spell_slot_2%
+ECHO %player.spell_slot_3%
+ECHO %player.spell_slot_4%
+ECHO %player.spell_slot_5%
+ECHO %player.spell_slot_1_type%
+ECHO %player.spell_slot_2_type%
+ECHO %player.spell_slot_3_type%
+ECHO %player.spell_slot_4_type%
+ECHO %player.spell_slot_5_type%
 ECHO %blacksmith_longSword_price%
 ECHO %blacksmith_shortSword_price%
 ECHO %blacksmith_greatAxe_price%
@@ -281,6 +358,7 @@ SET /P clarke_blackwell_added_party=
 SET /P player_armor_equipped=
 SET /P player_weapon_equipped=
 SET /P player_shield_equipped=
+SET /P player.spell_equipped=
 SET /P player.inventory_slot_1=
 SET /P player.inventory_slot_2=
 SET /P player.inventory_slot_3=
@@ -371,6 +449,76 @@ SET /P player.inventory_slot_12_avail_enchant=
 SET /P player.inventory_slot_13_avail_enchant=
 SET /P player.inventory_slot_14_avail_enchant=
 SET /P player.inventory_slot_15_avail_enchant=
+SET /P player.inventory_slot_1_damage=
+SET /P player.inventory_slot_2_damage=
+SET /P player.inventory_slot_3_damage=
+SET /P player.inventory_slot_4_damage=
+SET /P player.inventory_slot_5_damage=
+SET /P player.inventory_slot_6_damage=
+SET /P player.inventory_slot_7_damage=
+SET /P player.inventory_slot_8_damage=
+SET /P player.inventory_slot_9_damage=
+SET /P player.inventory_slot_10_damage=
+SET /P player.inventory_slot_11_damage=
+SET /P player.inventory_slot_12_damage=
+SET /P player.inventory_slot_13_damage=
+SET /P player.inventory_slot_14_damage=
+SET /P player.inventory_slot_15_damage=
+SET /P player.inventory_slot_1_armor=
+SET /P player.inventory_slot_2_armor=
+SET /P player.inventory_slot_3_armor=
+SET /P player.inventory_slot_4_armor=
+SET /P player.inventory_slot_5_armor=
+SET /P player.inventory_slot_6_armor=
+SET /P player.inventory_slot_7_armor=
+SET /P player.inventory_slot_8_armor=
+SET /P player.inventory_slot_9_armor=
+SET /P player.inventory_slot_10_armor=
+SET /P player.inventory_slot_11_armor=
+SET /P player.inventory_slot_12_armor=
+SET /P player.inventory_slot_13_armor=
+SET /P player.inventory_slot_14_armor=
+SET /P player.inventory_slot_15_armor=
+SET /P player.inventory_slot_1_can_equip=
+SET /P player.inventory_slot_2_can_equip=
+SET /P player.inventory_slot_3_can_equip=
+SET /P player.inventory_slot_4_can_equip=
+SET /P player.inventory_slot_5_can_equip=
+SET /P player.inventory_slot_6_can_equip=
+SET /P player.inventory_slot_7_can_equip=
+SET /P player.inventory_slot_8_can_equip=
+SET /P player.inventory_slot_9_can_equip=
+SET /P player.inventory_slot_10_can_equip=
+SET /P player.inventory_slot_11_can_equip=
+SET /P player.inventory_slot_12_can_equip=
+SET /P player.inventory_slot_13_can_equip=
+SET /P player.inventory_slot_14_can_equip=
+SET /P player.inventory_slot_15_can_equip=
+SET /P player.inventory_slot_1_item_equipped=
+SET /P player.inventory_slot_2_item_equipped=
+SET /P player.inventory_slot_3_item_equipped=
+SET /P player.inventory_slot_4_item_equipped=
+SET /P player.inventory_slot_5_item_equipped=
+SET /P player.inventory_slot_6_item_equipped=
+SET /P player.inventory_slot_7_item_equipped=
+SET /P player.inventory_slot_8_item_equipped=
+SET /P player.inventory_slot_9_item_equipped=
+SET /P player.inventory_slot_10_item_equipped=
+SET /P player.inventory_slot_11_item_equipped=
+SET /P player.inventory_slot_12_item_equipped=
+SET /P player.inventory_slot_13_item_equipped=
+SET /P player.inventory_slot_14_item_equipped=
+SET /P player.inventory_slot_15_item_equipped=
+SET /P player.spell_slot_1=
+SET /P player.spell_slot_2=
+SET /P player.spell_slot_3=
+SET /P player.spell_slot_4=
+SET /P player.spell_slot_5=
+SET /P player.spell_slot_1_type=
+SET /P player.spell_slot_2_type=
+SET /P player.spell_slot_3_type=
+SET /P player.spell_slot_4_type=
+SET /P player.spell_slot_5_type=
 SET /P blacksmith_longSword_price=
 SET /P blacksmith_shortSword_price=
 SET /P blacksmith_greatAxe_price=
@@ -433,9 +581,9 @@ SET player_magicka=100
 SET player_damage=5
 SET player_armor=0
 SET player_class=None
-SET player_coins=0
+SET player_coins=1000
 SET player_xp=0
-SET player_lunis=0
+SET player_lunis=25
 SET player_level=1
 SET player_class_ability=none
 SET player_stamina_max=100
@@ -481,6 +629,7 @@ REM Creates empty inventory slots
 SET player_armor_equipped=EMPTY
 SET player_weapon_equipped=EMPTY
 SET player_shield_equipped=EMPTY
+SET player.spell_equipped=EMPTY
 REM Default inventory grid.
 SET player.inventory_slot_1=EMPTY
 SET player.inventory_slot_2=EMPTY
@@ -562,21 +711,93 @@ SET player.inventory_slot_13_attribute=NONE
 SET player.inventory_slot_14_attribute=NONE
 SET player.inventory_slot_15_attribute=NONE
 REM Default inventory item enchantment availability.
-SET player.inventory_slot_1_avail_enchant=false
-SET player.inventory_slot_2_avail_enchant=false
-SET player.inventory_slot_3_avail_enchant=false
-SET player.inventory_slot_4_avail_enchant=false
-SET player.inventory_slot_5_avail_enchant=false
-SET player.inventory_slot_6_avail_enchant=false
-SET player.inventory_slot_7_avail_enchant=false
-SET player.inventory_slot_8_avail_enchant=false
-SET player.inventory_slot_9_avail_enchant=false
-SET player.inventory_slot_10_avail_enchant=false
-SET player.inventory_slot_11_avail_enchant=false
-SET player.inventory_slot_12_avail_enchant=false
-SET player.inventory_slot_13_avail_enchant=false
-SET player.inventory_slot_14_avail_enchant=false
-SET player.inventory_slot_15_avail_enchant=false
+SET player.inventory_slot_1_avail_enchant=FALSE
+SET player.inventory_slot_2_avail_enchant=FALSE
+SET player.inventory_slot_3_avail_enchant=FALSE
+SET player.inventory_slot_4_avail_enchant=FALSE
+SET player.inventory_slot_5_avail_enchant=FALSE
+SET player.inventory_slot_6_avail_enchant=FALSE
+SET player.inventory_slot_7_avail_enchant=FALSE
+SET player.inventory_slot_8_avail_enchant=FALSE
+SET player.inventory_slot_9_avail_enchant=FALSE
+SET player.inventory_slot_10_avail_enchant=FALSE
+SET player.inventory_slot_11_avail_enchant=FALSE
+SET player.inventory_slot_12_avail_enchant=FALSE
+SET player.inventory_slot_13_avail_enchant=FALSE
+SET player.inventory_slot_14_avail_enchant=FALSE
+SET player.inventory_slot_15_avail_enchant=FALSE
+REM Extra slot attributes.
+SET player.inventory_slot_1_damage=NA
+SET player.inventory_slot_2_damage=NA
+SET player.inventory_slot_3_damage=NA
+SET player.inventory_slot_4_damage=NA
+SET player.inventory_slot_5_damage=NA
+SET player.inventory_slot_6_damage=NA
+SET player.inventory_slot_7_damage=NA
+SET player.inventory_slot_8_damage=NA
+SET player.inventory_slot_9_damage=NA
+SET player.inventory_slot_10_damage=NA
+SET player.inventory_slot_11_damage=NA
+SET player.inventory_slot_12_damage=NA
+SET player.inventory_slot_13_damage=NA
+SET player.inventory_slot_14_damage=NA
+SET player.inventory_slot_15_damage=NA
+SET player.inventory_slot_1_armor=NA
+SET player.inventory_slot_2_armor=NA
+SET player.inventory_slot_3_armor=NA
+SET player.inventory_slot_4_armor=NA
+SET player.inventory_slot_5_armor=NA
+SET player.inventory_slot_6_armor=NA
+SET player.inventory_slot_7_armor=NA
+SET player.inventory_slot_8_armor=NA
+SET player.inventory_slot_9_armor=NA
+SET player.inventory_slot_10_armor=NA
+SET player.inventory_slot_11_armor=NA
+SET player.inventory_slot_12_armor=NA
+SET player.inventory_slot_13_armor=NA
+SET player.inventory_slot_14_armor=NA
+SET player.inventory_slot_15_armor=NA
+SET player.inventory_slot_1_can_equip=FALSE
+SET player.inventory_slot_2_can_equip=FALSE
+SET player.inventory_slot_3_can_equip=FALSE
+SET player.inventory_slot_4_can_equip=FALSE
+SET player.inventory_slot_5_can_equip=FALSE
+SET player.inventory_slot_6_can_equip=FALSE
+SET player.inventory_slot_7_can_equip=FALSE
+SET player.inventory_slot_8_can_equip=FALSE
+SET player.inventory_slot_9_can_equip=FALSE
+SET player.inventory_slot_10_can_equip=FALSE
+SET player.inventory_slot_11_can_equip=FALSE
+SET player.inventory_slot_12_can_equip=FALSE
+SET player.inventory_slot_13_can_equip=FALSE
+SET player.inventory_slot_14_can_equip=FALSE
+SET player.inventory_slot_15_can_equip=FALSE
+SET player.inventory_slot_1_item_equipped=FALSE
+SET player.inventory_slot_2_item_equipped=FALSE
+SET player.inventory_slot_3_item_equipped=FALSE
+SET player.inventory_slot_4_item_equipped=FALSE
+SET player.inventory_slot_5_item_equipped=FALSE
+SET player.inventory_slot_6_item_equipped=FALSE
+SET player.inventory_slot_7_item_equipped=FALSE
+SET player.inventory_slot_8_item_equipped=FALSE
+SET player.inventory_slot_9_item_equipped=FALSE
+SET player.inventory_slot_10_item_equipped=FALSE
+SET player.inventory_slot_11_item_equipped=FALSE
+SET player.inventory_slot_12_item_equipped=FALSE
+SET player.inventory_slot_13_item_equipped=FALSE
+SET player.inventory_slot_14_item_equipped=FALSE
+SET player.inventory_slot_15_item_equipped=FALSE
+REM Player spell inventory.
+SET player.spell_slot_1=EMPTY
+SET player.spell_slot_2=EMPTY
+SET player.spell_slot_3=EMPTY
+SET player.spell_slot_4=EMPTY
+SET player.spell_slot_5=EMPTY
+SET player.spell_slot_1_type=NONE
+SET player.spell_slot_2_type=NONE
+SET player.spell_slot_3_type=NONE
+SET player.spell_slot_4_type=NONE
+SET player.spell_slot_5_type=NONE
 GOTO :INIT_MERCHANTS
 
 REM Setup Merchant inventories & Prices

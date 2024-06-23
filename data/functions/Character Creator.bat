@@ -1,8 +1,8 @@
 @ECHO OFF
-TITLE (WINDHELM) Beta 2.1.1 - Character Creator
+TITLE (WINDHELM) - Character Creator
 
 REM Check for existing Player data.
-IF EXIST "%cd%\data\player\Player Stats.txt" (
+IF EXIST "%cd%\data\player\savedata.txt" (
     GOTO :overwrite_saveQ
 ) ELSE (
     GOTO :ENTER_NAME
@@ -13,7 +13,7 @@ REM Warns the Player that an existing save has been found and asks if they wish 
 MODE con: cols=95 lines=20
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\overwrite_save.txt"
+TYPE "%cd%\data\assets\ui\overwrite_save.txt"
 ECHO.
 ECHO.
 ECHO Warning! An existing save has been detected. Do you wish to overwrite this existing save?
@@ -32,7 +32,7 @@ MODE con: cols=120 lines=22
 SET OSQ=0
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\your_name.txt"
+TYPE "%cd%\data\assets\ui\your_name.txt"
 ECHO.
 ECHO.
 ECHO Do you recall your name, Shard?
@@ -44,7 +44,7 @@ GOTO :CHOOSE_PRONOUN
 MODE con: cols=120 lines=20
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\pronouns.txt"
+TYPE "%cd%\data\assets\ui\pronouns.txt"
 ECHO.
 ECHO.
 ECHO How do you wish others to refer to you?
@@ -88,7 +88,7 @@ REM Custom Pronoun selection
 :CUSTOM_P_PERSONAL
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\your_name.txt"
+TYPE "%cd%\data\assets\ui\your_name.txt"
 ECHO.
 ECHO.
 ECHO Custom Pronouns
@@ -102,7 +102,7 @@ GOTO :CHOOSE_P_PERSONAL_2
 :CHOOSE_P_PERSONAL_2
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\your_name.txt"
+TYPE "%cd%\data\assets\ui\your_name.txt"
 ECHO.
 ECHO.
 ECHO Custom Pronouns / 2
@@ -115,7 +115,7 @@ GOTO :CHOOSE_P_POSSESIVE
 :CHOOSE_P_POSSESIVE
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\your_name.txt"
+TYPE "%cd%\data\assets\ui\your_name.txt"
 ECHO.
 ECHO.
 ECHO Custom Pronouns
@@ -128,7 +128,7 @@ GOTO :CHOOSE_P_REFLEXIVE_1
 :CHOOSE_P_REFLEXIVE_1
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\your_name.txt"
+TYPE "%cd%\data\assets\ui\your_name.txt"
 ECHO.
 ECHO.
 ECHO Custom Pronouns
@@ -141,7 +141,7 @@ GOTO :CHOOSE_P_INTENSIVE
 :CHOOSE_P_INTENSIVE
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\your_name.txt"
+TYPE "%cd%\data\assets\ui\your_name.txt"
 ECHO.
 ECHO.
 ECHO Custom Pronouns
@@ -155,7 +155,7 @@ GOTO :CHOOSE_CLASS
 SET SLOPr=INIT
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\your_class.txt"
+TYPE "%cd%\data\assets\ui\your_class.txt"
 ECHO.
 ECHO Choose a class for your Character.
 ECHO +----------------------------------------------------------------------------------------------------------------------+
@@ -173,7 +173,7 @@ GOTO :CHOOSE_CLASS
 MODE con: cols=120 lines=20
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\druid.txt"
+TYPE "%cd%\data\assets\ui\druid.txt"
 ECHO.
 ECHO.
 ECHO Choose a class for your Character.
@@ -194,7 +194,7 @@ GOTO :CHOOSE_CLASS
 MODE con: cols=120 lines=20
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\warrior.txt"
+TYPE "%cd%\data\assets\ui\warrior.txt"
 ECHO.
 ECHO.
 ECHO Choose a class for your Character.
@@ -215,7 +215,7 @@ GOTO :CHOOSE_CLASS
 MODE con: cols=120 lines=20
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\sorcerer.txt"
+TYPE "%cd%\data\assets\ui\sorcerer.txt"
 ECHO.
 ECHO.
 ECHO Choose a class for your Character.

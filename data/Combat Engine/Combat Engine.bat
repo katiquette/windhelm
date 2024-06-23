@@ -2,7 +2,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 @ECHO OFF
 MODE con: cols=120 lines=29
 REM Combat Engine Beta Version 8.0.0.
-REM Extra Build Information: ce1-240613-B1.BE8.GU0
+REM Extra Build Information: ce1-240619-B1.BE8.GU0
 REM This software is licensed under GPL-3.0-or-later.
 
 REM "Enemy Battle Screen". Player and Enemy information is displayed here.
@@ -20,7 +20,7 @@ ECHO +--------------------------------------------------------------------------
 ECHO ^|                             HP: %enemy_health% ^| ATK: %enemy_attack% ^| STM: %enemy_stamina%
 ECHO ^| %displayMessage%
 ECHO +---------------------------------------------------------------------------------------------------------------------+
-ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka%
+ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor_equipped%, %player_armor% ^| MGK: %player_magicka%
 ECHO +---------------------------------------------------------------------------------------------------------------------+
 ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka% ^| LVL: %follower_level%
 ECHO ^| ACTION 1: %q_action_1% ^| ACTION 2: %q_action_2% ^| ACTION 3: %q_action_3%
@@ -231,14 +231,14 @@ TYPE "%cd%\data\assets\ui\victory.txt"
 ECHO.
 ECHO +----------------------------------------------------------------------------------------------------------------------+
 ECHO ^| %lootFound% ^| %player_levelup_notif%
-ECHO ^| You defeated the %curEn%, congratulations! You've been rewarded with %goldGained% Gold and %xpGained% xp.
+ECHO ^| You defeated the %curEn%, congratulations^! You've been rewarded with %goldGained% Gold and %xpGained% xp.
 ECHO +----------------------------------------------------------------------------------------------------------------------+
 ECHO ^| HP: %player_health% ^| STM: %player_stamina% ^| ATK: %player_damage% ^| AMR: %player_armor% ^| MGK: %player_magicka%
 ECHO +----------------------------------------------------------------------------------------------------------------------+
 ECHO ^| FOLLOWER: %follower_name% ^| HP: %follower_health% ^| ATK: %follower_attack% ^| STM: %follower_stamina% ^| MGK: %follower_magicka% ^| LVL: %follower_level%
 ECHO ^| ACTION 1: %q_action_1% ^| ACTION 2: %q_action_2% ^| ACTION 3: %q_action_3%
 ECHO +----------------------------------------------------------------------------------------------------------------------+
-ECHO ^| [1 / LOOT %curEn% ] ^| [E / EXIT ]  ^| %player_message%                                                       +
+ECHO ^| [1 / LOOT %curEn% ] ^| [E / EXIT ]  ^| %player_message%                                                      +
 ECHO +----------------------------------------------------------------------------------------------------------------------+
 CHOICE /C 1E /N /M ">"
 IF ERRORLEVEL 2 GOTO :EXIT

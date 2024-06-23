@@ -1,12 +1,11 @@
 @ECHO OFF
-TITLE (WINDHELM) Settings ^| %player_class% the %player_class%
-REM Settings. Version 2.0 (240209) - for Windhelm Build 2 "Bottle o' Features"
+TITLE (Windhelm - %updateTitle%) ^| Settings
 
 REM Main Menu
 :main
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\settings.txt"
+TYPE "%cd%\data\assets\ui\settings.txt"
 ECHO.
 ECHO +--------------------------------------------------------------------------------------------------+
 ECHO ^| [1 / CHANGE THEME ] ^| [E / EXIT ]                                                                +
@@ -19,7 +18,7 @@ REM CHANGE BACKGROUND & TEXT COLOR.
 :theme_select
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\settings.txt"
+TYPE "%cd%\data\assets\ui\settings.txt"
 ECHO.
 ECHO %displayMessage%
 ECHO +--------------------------------------------------------------------------------------------------+
@@ -38,7 +37,7 @@ IF ERRORLEVEL 1 GOTO :0E
 :custom_color
 CLS
 ECHO.
-TYPE "%cd%\data\ascii\menus\color.txt"
+TYPE "%cd%\data\assets\ui\color.txt"
 ECHO.
 ECHO ENTER A VALID BATCH SCRIPT COLOR CODE. (SEE COLOR /?)
 ECHO %displayMessage%
@@ -85,5 +84,6 @@ GOTO :theme_select
 :save_choice
 (
 ECHO %setColor%
-)>data\settings.txt
+ECHO %introView%
+)>"%winLoc%\data\settings.txt"
 GOTO :EOF
