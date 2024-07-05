@@ -1,3 +1,6 @@
+# PLEASE READ
+As of 05 JULY 2024 this Windhelm project is no longer in development. The project has been moved to [this repository](https://www.github.com/katiquette/windhelm/).
+
 # About Windhelm
 Windhelm is a text based, story driven RPG game developed in Batch Script for the Windows operating system.
 
