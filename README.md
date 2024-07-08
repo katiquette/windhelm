@@ -1,11 +1,10 @@
-# PLEASE READ
-As of 05 JULY 2024 this Windhelm project is no longer in development. The project has been moved to [this repository](https://www.github.com/katiquette/windhelm/).
-
 # About Windhelm
 Windhelm is a text based, story driven RPG game developed in Batch Script for the Windows operating system.
 
 Explore the Iridescent forest and discover the unique magics that have kept Windhelm safe from the outside world. Encounter shards of others souls, attempt to help them or use them for your own gain.
 Discover your past and attempt to remember who _or what_ you were. It should be noted this project contains discussion around sensitive topics that may not be suitable for everyone.
+
+## For the cross-platform version of Windhelm, please visit [this page](https://github.com/katiquette/windhelm/).
 
 ## Downloading
 This repo is in active development. A side effect of this is that at any time, if you were to download the repo as-is you may get a broken version of Windhelm. Which is why I suggest you get Windhelm from the
